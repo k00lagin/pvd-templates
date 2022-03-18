@@ -1,0 +1,13 @@
+{
+	"quoteProps": "consistent",
+	"bracketSpacing": false,
+	"useTabs": true,
+	"overrides": [
+		{
+			"files": "*.xsl",
+			"options": {
+				"parser": "html"
+			}
+		}
+	]
+}

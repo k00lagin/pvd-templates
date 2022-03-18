@@ -45,26 +45,26 @@
 
 	<xsl:variable name="certificationDoc" select="kp:KPOKS/kp:CertificationDoc"/>
 	<xsl:variable name="contractors" select="kp:KPOKS/kp:Contractors"/>
-  <xsl:variable name="cadObj">
-    <xsl:choose>
-      <xsl:when test="kp:KPOKS/kp:Object">
-        <xsl:value-of select="1"/>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:value-of select="0"/>
-      </xsl:otherwise>  
-    </xsl:choose>
-  </xsl:variable>
-  <xsl:variable name="cadNum">
-    <xsl:choose>
-      <xsl:when test="kp:KPOKS/kp:Realty/descendant::node()/@CadastralNumber">
-        <xsl:value-of select="kp:KPOKS/kp:Realty/descendant::node()/@CadastralNumber"/>
-      </xsl:when>
-      <xsl:when test="kp:KPOKS/kp:Object/kp:CadastralNumber">
-        <xsl:value-of select="kp:KPOKS/kp:Object/kp:CadastralNumber"/>
-      </xsl:when>
-    </xsl:choose>            
-  </xsl:variable>              
+	<xsl:variable name="cadObj">
+		<xsl:choose>
+			<xsl:when test="kp:KPOKS/kp:Object">
+				<xsl:value-of select="1"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="0"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+	<xsl:variable name="cadNum">
+		<xsl:choose>
+			<xsl:when test="kp:KPOKS/kp:Realty/descendant::node()/@CadastralNumber">
+				<xsl:value-of select="kp:KPOKS/kp:Realty/descendant::node()/@CadastralNumber"/>
+			</xsl:when>
+			<xsl:when test="kp:KPOKS/kp:Object/kp:CadastralNumber">
+				<xsl:value-of select="kp:KPOKS/kp:Object/kp:CadastralNumber"/>
+			</xsl:when>
+		</xsl:choose>
+	</xsl:variable>
 	<xsl:variable name="kindRealty">
 		<xsl:choose>
 			<xsl:when test=".//descendant::kp:ObjectType='002001002000'">Здание</xsl:when>
@@ -74,13 +74,13 @@
 			<xsl:when test=".//descendant::kp:ObjectType='002001005000'">Объект незавершенного строительства</xsl:when>
 			<xsl:when test=".//descendant::kp:ObjectType='002001003000'">Помещение</xsl:when>
 
-      <xsl:when test="kp:KPOKS/kp:Object/kp:ObjectType='002002002000'">Помещение</xsl:when>
-      <xsl:when test="kp:KPOKS/kp:Object/kp:ObjectType='002002001000'">Здание</xsl:when>
-      <xsl:when test="kp:KPOKS/kp:Object/kp:ObjectType='002002005000'">Объект незавершенного строительства</xsl:when>
-      <xsl:when test="kp:KPOKS/kp:Object/kp:ObjectType='002002004000'">сооружение</xsl:when>
-      <xsl:when test="kp:KPOKS/kp:Object/kp:ObjectType='002002000000'">
-        <xsl:apply-templates select="kp:KPOKS/kp:Object/kp:ObjectTypeText"/>
-      </xsl:when>            
+			<xsl:when test="kp:KPOKS/kp:Object/kp:ObjectType='002002002000'">Помещение</xsl:when>
+			<xsl:when test="kp:KPOKS/kp:Object/kp:ObjectType='002002001000'">Здание</xsl:when>
+			<xsl:when test="kp:KPOKS/kp:Object/kp:ObjectType='002002005000'">Объект незавершенного строительства</xsl:when>
+			<xsl:when test="kp:KPOKS/kp:Object/kp:ObjectType='002002004000'">сооружение</xsl:when>
+			<xsl:when test="kp:KPOKS/kp:Object/kp:ObjectType='002002000000'">
+				<xsl:apply-templates select="kp:KPOKS/kp:Object/kp:ObjectTypeText"/>
+			</xsl:when>
 		</xsl:choose>
 	</xsl:variable>
 	<xsl:variable name="year" select="substring($certificationDoc/cert:Date,1,4)"/>
@@ -89,22 +89,22 @@
 	<xsl:variable name="Plans" select=".//kp:Plans/kp:Plan"/>
 	<xsl:variable name="spatialElement" select="kp:KPOKS/kp:Realty/descendant::kp:EntitySpatial"/>
 	<xsl:variable name="coordSystems" select="kp:KPOKS/kp:CoordSystems"/>
-  
-  <xsl:variable name="SExtract" select="kp:KPOKS/kp:ReestrExtract/kp:ExtractObjectRight"/>
-  <xsl:variable name="DeclarAttribute" select="kp:KPOKS/kp:ReestrExtract/kp:DeclarAttribute"/>
-  <xsl:variable name="HeadContent" select="kp:KPOKS/kp:ReestrExtract/kp:ExtractObjectRight/kp:HeadContent"/>
-  <xsl:variable name="FootContent" select="kp:KPOKS/kp:ReestrExtract/kp:ExtractObjectRight/kp:FootContent"/>
-  <xsl:variable name="Sender" select="kp:KPOKS/kp:eDocument/kp:Sender"/>
-  <xsl:variable name="Building" select="kp:KPOKS/kp:Realty/kp:Building"/>
-  <xsl:variable name="Construction" select="kp:KPOKS/kp:Realty/kp:Construction"/>
-  <xsl:variable name="Uncompleted" select="kp:KPOKS/kp:Realty/kp:Uncompleted"/>
-  <xsl:variable name="Flat" select="kp:KPOKS/kp:Realty/kp:Flat"/>
-  <xsl:variable name="typeExtract">
-    <xsl:value-of select="$DeclarAttribute/@ExtractTypeCode"/>
-  </xsl:variable> 
+
+	<xsl:variable name="SExtract" select="kp:KPOKS/kp:ReestrExtract/kp:ExtractObjectRight"/>
+	<xsl:variable name="DeclarAttribute" select="kp:KPOKS/kp:ReestrExtract/kp:DeclarAttribute"/>
+	<xsl:variable name="HeadContent" select="kp:KPOKS/kp:ReestrExtract/kp:ExtractObjectRight/kp:HeadContent"/>
+	<xsl:variable name="FootContent" select="kp:KPOKS/kp:ReestrExtract/kp:ExtractObjectRight/kp:FootContent"/>
+	<xsl:variable name="Sender" select="kp:KPOKS/kp:eDocument/kp:Sender"/>
+	<xsl:variable name="Building" select="kp:KPOKS/kp:Realty/kp:Building"/>
+	<xsl:variable name="Construction" select="kp:KPOKS/kp:Realty/kp:Construction"/>
+	<xsl:variable name="Uncompleted" select="kp:KPOKS/kp:Realty/kp:Uncompleted"/>
+	<xsl:variable name="Flat" select="kp:KPOKS/kp:Realty/kp:Flat"/>
+	<xsl:variable name="typeExtract">
+		<xsl:value-of select="$DeclarAttribute/@ExtractTypeCode"/>
+	</xsl:variable>
 	<xsl:variable name="smallcase" select="'абвгдеёжзийклмнопрстуфхцчшщьыъэюя'"/>
 	<xsl:variable name="uppercase" select="'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЬЫЪЭЮЯ'"/>
-	
+
 	<xsl:template match="kp:KPOKS">
 		<xsl:apply-templates select="kp:Realty | kp:KPOKS[not(kp:Realty)]"/>
 	</xsl:template>
@@ -181,54 +181,54 @@ var Coords = new Array();
 function load(id) {
 	var canvas;
 	var context;
-    canvas = document.getElementById(id);
-    if (!canvas.getContext) return;
+		canvas = document.getElementById(id);
+		if (!canvas.getContext) return;
 
-    context = canvas.getContext("2d");
+		context = canvas.getContext("2d");
 
-    // Отрисовка по таймеру
-    setInterval(drawPre, 100, context, id);
+		// Отрисовка по таймеру
+		setInterval(drawPre, 100, context, id);
 
-    // Обработчик колеса мыши
-    canvas.onmousewheel = function (event) {
-        var mousex = event.clientX - canvas.offsetLeft;
-        var mousey = event.clientY - canvas.offsetTop;
-        var wheel = event.wheelDelta / 120;
+		// Обработчик колеса мыши
+		canvas.onmousewheel = function (event) {
+				var mousex = event.clientX - canvas.offsetLeft;
+				var mousey = event.clientY - canvas.offsetTop;
+				var wheel = event.wheelDelta / 120;
 
-        var zoom = Math.pow(1 + Math.abs(wheel) / 2, wheel > 0 ? 1 : -1);
+				var zoom = Math.pow(1 + Math.abs(wheel) / 2, wheel > 0 ? 1 : -1);
 
-        zoomTo(context, mousex, mousey, zoom);
+				zoomTo(context, mousex, mousey, zoom);
 
-        if (event.preventDefault) {
-            event.preventDefault();
-        }
-    }
+				if (event.preventDefault) {
+						event.preventDefault();
+				}
+		}
 
-    $(canvas).mousedown(function mouseMove(event)
-    {
-		// Когда отпускаем мышку - перестаем 
+		$(canvas).mousedown(function mouseMove(event)
+		{
+		// Когда отпускаем мышку - перестаем
 		$(document).bind('mouseup.cropper', function () {
 			$(document).unbind('mousemove.cropper');
 			$(document).unbind('mouseup.cropper');
 		});
-	
+
 		//Сохраняем координаты нажатия
 		var oldX = event.clientX, oldY = event.clientY;
-	
+
 		// Перемещаем все объекты по карте вместе с мышью
 		$(document).bind('mousemove.cropper', function (event) {
 			var x = event.clientX, y = event.clientY, newX = (oldX - x) * -1, newY = (oldY - y) * -1;
-	
+
 			originx = newX / scale;
 			originy = newY / scale;
-	
+
 			// Перемещаем объект
 			context.clearRect(0, 0, context.canvas.width, context.canvas.height);
 			context.translate(newX / scale, newY / scale);
-	
+
 			// Перерисовываем картинку
 			drawPre(context, id);
-	
+
 			// Обновляем координаты
 			oldX = x;
 			oldY = y;
@@ -237,30 +237,30 @@ function load(id) {
 		return false;
 	});
 
-    for (var i = Coords.length - 1; i >= 0; i--) {
-        for (var z = 0; z < Coords[i].length; z++) {
-            if (Coords[i][z].length == 4) {
-                var rx = Coords[i][z][1] + (Coords[i][z][3] * Math.sin(2 * Math.PI));
-                var ry = Coords[i][z][2] + (Coords[i][z][3] * Math.cos(2 * Math.PI));
-                if ((rx - Coords[i][z][1]) + maxX > maxX) {
-                    maxX = maxX + (rx - Coords[i][z][1]);
-                    maxY = maxY + (rx - Coords[i][z][1]);
-                }
-                if ((ry - Coords[i][z][2]) + maxY > maxY) {
-                    maxY = maxY + (ry - Coords[i][z][2]);
-                    maxX = maxX + (ry - Coords[i][z][2]);
-                }
-            }
-        }
-    }
-	
+		for (var i = Coords.length - 1; i >= 0; i--) {
+				for (var z = 0; z < Coords[i].length; z++) {
+						if (Coords[i][z].length == 4) {
+								var rx = Coords[i][z][1] + (Coords[i][z][3] * Math.sin(2 * Math.PI));
+								var ry = Coords[i][z][2] + (Coords[i][z][3] * Math.cos(2 * Math.PI));
+								if ((rx - Coords[i][z][1]) + maxX > maxX) {
+										maxX = maxX + (rx - Coords[i][z][1]);
+										maxY = maxY + (rx - Coords[i][z][1]);
+								}
+								if ((ry - Coords[i][z][2]) + maxY > maxY) {
+										maxY = maxY + (ry - Coords[i][z][2]);
+										maxX = maxX + (ry - Coords[i][z][2]);
+								}
+						}
+				}
+		}
+
 	drawPre(context, id);
 };
 
 function drawPre(context, id){
-    var idc = Coords.length - 1;
-    if (!isNaN(parseInt(id.substring(6, 7))))
-        idc = parseInt(id.substring(6, 7));
+		var idc = Coords.length - 1;
+		if (!isNaN(parseInt(id.substring(6, 7))))
+				idc = parseInt(id.substring(6, 7));
 
 	if(id=='canvas')
 		drawAll(context);
@@ -271,47 +271,47 @@ function drawPre(context, id){
 
 // Отрисовка всех контуров
 function drawAll(context) {
-    context.fillStyle = "white";
+		context.fillStyle = "white";
 
-    var width = 700;
-    var height = 600;
+		var width = 700;
+		var height = 600;
 
-    context.save();
-    context.setTransform(1, 0, 0, 1, 0, 0);
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    context.restore();
+		context.save();
+		context.setTransform(1, 0, 0, 1, 0, 0);
+		context.clearRect(0, 0, canvas.width, canvas.height);
+		context.restore();
 
-    var cX = maxY - minY;
-    var cY = maxX - minX;
+		var cX = maxY - minY;
+		var cY = maxX - minX;
 
-    // Коэффициент масштабирования
-    var koef;
-    var koefX = cX / width;
-    var koefY = cY / height;
-    if (koefX < koefY) koef = koefY; else koef = koefX;
+		// Коэффициент масштабирования
+		var koef;
+		var koefX = cX / width;
+		var koefY = cY / height;
+		if (koefX < koefY) koef = koefY; else koef = koefX;
 
-    // Смещение координат для центрирования
-    var offX = 0;
-    var offY = 0;
-    //if (cX < height) offY = (height - cX) / 2; else offX = (width - cY) / 2;
+		// Смещение координат для центрирования
+		var offX = 0;
+		var offY = 0;
+		//if (cX < height) offY = (height - cX) / 2; else offX = (width - cY) / 2;
 
-    for (var i = Coords.length - 1; i >= 0; i--) {
-        var polygon = [];
-        context.save();
-        context.beginPath();
-        context.lineWidth = 2;
+		for (var i = Coords.length - 1; i >= 0; i--) {
+				var polygon = [];
+				context.save();
+				context.beginPath();
+				context.lineWidth = 2;
 
-        for (var z = 0; z < Coords[i].length; z++) {
-            x1 = ((maxX - Coords[i][z][1]) / koef) + offX;
-            y1 = ((Coords[i][z][2] - minY) / koef) + offY;
+				for (var z = 0; z < Coords[i].length; z++) {
+						x1 = ((maxX - Coords[i][z][1]) / koef) + offX;
+						y1 = ((Coords[i][z][2] - minY) / koef) + offY;
 
-            if (Coords[i][z].length > 4) {
-                x2p = x1;
-                y2p = y1;
-                context.moveTo(y1, x1);
-                for (var j = 1; j < Coords[i][z].length / 2; j++) {
-                    x2 = ((maxX - Coords[i][z][(j * 2) - 1]) / koef) + offX;
-                    y2 = ((Coords[i][z][j * 2] - minY) / koef) + offY;
+						if (Coords[i][z].length > 4) {
+								x2p = x1;
+								y2p = y1;
+								context.moveTo(y1, x1);
+								for (var j = 1; j < Coords[i][z].length / 2; j++) {
+										x2 = ((maxX - Coords[i][z][(j * 2) - 1]) / koef) + offX;
+										y2 = ((Coords[i][z][j * 2] - minY) / koef) + offY;
 
 					if (Coords[i][0][0].charAt(0) == 'R')
 						context.dashedLine(y2p, x2p, y2, x2, [2, 5]);
@@ -320,28 +320,28 @@ function drawAll(context) {
 					else
 						context.lineTo(y2, x2);
 
-                    polygon[j - 1] = new Point(y2, x2);
-                    x2p = x2;
-                    y2p = y2;
-                }
-            }
-            else {
-                context.stroke();
-                context.beginPath();
-                var rx = ((maxX - (Coords[i][z][1] + (Coords[i][z][3] * Math.cos(2 * Math.PI)))) / koef) + offX;
-                var ry = (((Coords[i][z][2] + (Coords[i][z][3] * Math.sin(2 * Math.PI))) - minY) / koef) + offY;
-                
+										polygon[j - 1] = new Point(y2, x2);
+										x2p = x2;
+										y2p = y2;
+								}
+						}
+						else {
+								context.stroke();
+								context.beginPath();
+								var rx = ((maxX - (Coords[i][z][1] + (Coords[i][z][3] * Math.cos(2 * Math.PI)))) / koef) + offX;
+								var ry = (((Coords[i][z][2] + (Coords[i][z][3] * Math.sin(2 * Math.PI))) - minY) / koef) + offY;
+
 				if (Coords[i][0][0].charAt(0) == 'R'){
 					context.fillStyle = "Black";
 					var dotsPerCircle=60;
 					var interval=(Math.PI*2)/dotsPerCircle;
-					
+
 					for(var d = 0; d < dotsPerCircle; d++){
 						desiredRadianAngleOnCircle = interval*d;
-						
+
 						var x = y1 + (x1 - rx) * Math.cos(desiredRadianAngleOnCircle);
 						var y = x1 + (x1 - rx) * Math.sin(desiredRadianAngleOnCircle);
-						
+
 						context.beginPath();
 						context.arc(x, y, 1, 0, 2 * Math.PI);
 						context.closePath();
@@ -350,9 +350,9 @@ function drawAll(context) {
 				}
 				else if (Coords[i][0][0].charAt(0) == 'P'){
 					context.fillStyle = "Black";
-					
+
 					var pointArray= calcPointsCirc(y1, x1, x1 - rx, 1);
-					
+
 					for(p = 0; p < pointArray.length; p++){
 						context.moveTo(pointArray[p].x, pointArray[p].y);
 						context.lineTo(pointArray[p].ex, pointArray[p].ey);
@@ -361,16 +361,16 @@ function drawAll(context) {
 				}
 				else
 					context.arc(y1, x1, x1 - rx, 0, 2 * Math.PI);
-					
-                polygon[polygon.length] = new Point(y1, x1);
-                context.restore();
-            }
-        }
 
-        context.stroke();
-        context.restore();
+								polygon[polygon.length] = new Point(y1, x1);
+								context.restore();
+						}
+				}
 
-        var center = (new Contour(polygon)).centroid();
+				context.stroke();
+				context.restore();
+
+				var center = (new Contour(polygon)).centroid();
 		if (isNaN(center.x) && isNaN(center.y)){
 			if (polygon.length==1){
 				center.x = polygon[0].x;
@@ -381,50 +381,50 @@ function drawAll(context) {
 				center.y = polygon[1].y;
 			}
 		}
-		
+
 		if (Coords[i][0][0].charAt(0) == 'Z')
 			context.fillStyle = "Black";
 		else
 			context.fillStyle = "Gray";
-        context.fillText(Coords[i][0][0].substring(1), center.x - (0.5 * context.measureText(Coords[i][0][0].substring(1)).width), center.y);
-    }
+				context.fillText(Coords[i][0][0].substring(1), center.x - (0.5 * context.measureText(Coords[i][0][0].substring(1)).width), center.y);
+		}
 };
 
 // Отрисовка полигона
 function drawPolygon(context, i) {
-    context.fillStyle = "white";
+		context.fillStyle = "white";
 
-    var width = 700;
-    var height = 600;
+		var width = 700;
+		var height = 600;
 
-    var minX = eval('minX' + i);
-    var minY = eval('minY' + i);
-    var maxX = eval('maxX' + i);
-    var maxY = eval('maxY' + i);
+		var minX = eval('minX' + i);
+		var minY = eval('minY' + i);
+		var maxX = eval('maxX' + i);
+		var maxY = eval('maxY' + i);
 
-    context.save();
-    context.setTransform(1, 0, 0, 1, 0, 0);
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    context.restore();
+		context.save();
+		context.setTransform(1, 0, 0, 1, 0, 0);
+		context.clearRect(0, 0, canvas.width, canvas.height);
+		context.restore();
 
-    var cX = maxY - minY;
-    var cY = maxX - minX;
+		var cX = maxY - minY;
+		var cY = maxX - minX;
 
-    // Коэффициент масштабирования
-    var koef;
-    var koefX = cX / width;
-    var koefY = cY / height;
-    if (koefX < koefY) koef = koefY; else koef = koefX;
-    if (koef==0) koef=1;
+		// Коэффициент масштабирования
+		var koef;
+		var koefX = cX / width;
+		var koefY = cY / height;
+		if (koefX < koefY) koef = koefY; else koef = koefX;
+		if (koef==0) koef=1;
 
-    // Смещение координат для центрирования
-    var offX = 0;
-    var offY = 0;
-    //if (cY < height) offY = (height - cY) / 2; else offX = (width - cX) / 2;
+		// Смещение координат для центрирования
+		var offX = 0;
+		var offY = 0;
+		//if (cY < height) offY = (height - cY) / 2; else offX = (width - cX) / 2;
 
 	var polygon = [];
-    context.save();
-    context.beginPath();
+		context.save();
+		context.beginPath();
 
 	for (var z = 0; z < Coords[i].length; z++) {
 		x1 = ((maxX - Coords[i][z][1]) / koef) + offX;
@@ -459,8 +459,8 @@ function drawPolygon(context, i) {
 		}
 	}
 
-    context.stroke();
-    context.restore();
+		context.stroke();
+		context.restore();
 
 	var center = (new Contour(polygon)).centroid();
 	if (isNaN(center.x) && isNaN(center.y)){
@@ -480,61 +480,61 @@ function drawPolygon(context, i) {
 
 // Точка центроида
 function Point(x, y) {
-    this.x = x;
-    this.y = y;
+		this.x = x;
+		this.y = y;
 };
 
 // Контур объекта
 function Contour(a) {
-    this.pts = a || [];
+		this.pts = a || [];
 };
 
 // Площадь объекта
 Contour.prototype.area = function () {
-    var area = 0;
-    var pts = this.pts;
-    var nPts = pts.length;
-    var j = nPts - 1;
-    var p1; var p2;
+		var area = 0;
+		var pts = this.pts;
+		var nPts = pts.length;
+		var j = nPts - 1;
+		var p1; var p2;
 
-    for (var i = 0; i < nPts; j = i++) {
-        p1 = pts[i]; p2 = pts[j];
-        area += p1.x * p2.y;
-        area -= p1.y * p2.x;
-    }
-    area /= 2;
-    return area;
+		for (var i = 0; i < nPts; j = i++) {
+				p1 = pts[i]; p2 = pts[j];
+				area += p1.x * p2.y;
+				area -= p1.y * p2.x;
+		}
+		area /= 2;
+		return area;
 };
 
 // Центроид объекта
 Contour.prototype.centroid = function () {
-    var pts = this.pts;
-    var nPts = pts.length;
-    var x = 0; var y = 0;
-    var f;
-    var j = nPts - 1;
-    var p1; var p2;
+		var pts = this.pts;
+		var nPts = pts.length;
+		var x = 0; var y = 0;
+		var f;
+		var j = nPts - 1;
+		var p1; var p2;
 
-    for (var i = 0; i < nPts; j = i++) {
-        p1 = pts[i]; p2 = pts[j];
-        f = p1.x * p2.y - p2.x * p1.y;
-        x += (p1.x + p2.x) * f;
-        y += (p1.y + p2.y) * f;
-    }
+		for (var i = 0; i < nPts; j = i++) {
+				p1 = pts[i]; p2 = pts[j];
+				f = p1.x * p2.y - p2.x * p1.y;
+				x += (p1.x + p2.x) * f;
+				y += (p1.y + p2.y) * f;
+		}
 
-    f = this.area() * 6;
-    return new Point(x / f, y / f);
+		f = this.area() * 6;
+		return new Point(x / f, y / f);
 };
 
 // Функция Zoom
 function zoomTo(context, x, y, z) {
-    context.translate(originX, originY);
-    context.scale(z, z);
-    context.translate(-(x / scale + originX - x / (scale * z)), -(y / scale + originY - y / (scale * z)));
+		context.translate(originX, originY);
+		context.scale(z, z);
+		context.translate(-(x / scale + originX - x / (scale * z)), -(y / scale + originY - y / (scale * z)));
 
-    originX = (x / scale + originX - x / (scale * z));
-    originY = (y / scale + originY - y / (scale * z));
-    scale *= z;
+		originX = (x / scale + originX - x / (scale * z));
+		originY = (y / scale + originY - y / (scale * z));
+		scale *= z;
 };
 
 function calcPointsCirc(cx, cy, rad, dashLength){
@@ -547,12 +547,12 @@ function calcPointsCirc(cx, cy, rad, dashLength){
 	{
 		var theta = alpha * i,
 		theta2 = alpha * (i + 1);
-		
+
 		points.push({x : (Math.cos(theta) * rad) + cx, y : (Math.sin(theta) * rad) + cy, ex : (Math.cos(theta2) * rad) + cx, ey : (Math.sin(theta2) * rad) + cy});
 		i += 2;
-	}              
-	return points;            
-} 
+	}
+	return points;
+}
 
 var CP = window.CanvasRenderingContext2D && CanvasRenderingContext2D.prototype;
 if (CP && CP.lineTo){
@@ -630,17 +630,17 @@ if (CP && CP.lineTo){
 						<xsl:text>load('canvas');</xsl:text>
 					</xsl:attribute>
 				</xsl:if>
-       <table border="0" width="950px" cellspacing="0" cellpadding="2" height="700px" align="center">
+			 <table border="0" width="950px" cellspacing="0" cellpadding="2" height="700px" align="center">
 					<tr>
 						<th valign="top">
-                  <xsl:apply-templates select="kp:Building|kp:Construction|kp:Uncompleted|kp:Flat|kp:Object"/>               
+									<xsl:apply-templates select="kp:Building|kp:Construction|kp:Uncompleted|kp:Flat|kp:Object"/>
 						</th>
 					</tr>
 				</table>
 			</xsl:element>
 		</html>
 	</xsl:template>
-	
+
 	<xsl:template name="BodyFunctionCycle">
 		<xsl:param name="total"/>
 		<xsl:param name="cur_index"/>
@@ -653,8 +653,8 @@ if (CP && CP.lineTo){
 		</xsl:if>
 	</xsl:template>
 
-	<xsl:template match="kp:Building|kp:Construction|kp:Uncompleted|kp:Flat|kp:Object">       
-    <xsl:variable name="list2">
+	<xsl:template match="kp:Building|kp:Construction|kp:Uncompleted|kp:Flat|kp:Object">
+		<xsl:variable name="list2">
 			<xsl:if test="count($spatialElement) &gt; 0">
 				<xsl:value-of select="1"/>
 			</xsl:if>
@@ -665,7 +665,7 @@ if (CP && CP.lineTo){
 		<xsl:variable name="list2c" select="count(descendant::kp:EntitySpatial[parent::kp:ConditionalPartLinear])"/>
 		<xsl:variable name="list2p" select="count($Plans)"/>
 		<xsl:variable name="list31" select="count(./kp:SubBuildings|./kp:SubConstructions|./kp:SubFlats)"/>
-		<xsl:variable name="list32" select="count(./kp:Encumbrances)"/>    
+		<xsl:variable name="list32" select="count(./kp:Encumbrances)"/>
 		<xsl:variable name="list3">
 			<xsl:if test="$list31!=0 or $list32!=0">
 				<xsl:value-of select="1"/>
@@ -704,7 +704,7 @@ if (CP && CP.lineTo){
 						</table>
 					</div>
 					<xsl:call-template name="Title">
-						<xsl:with-param name="pageNumber" select="1"/>           
+						<xsl:with-param name="pageNumber" select="1"/>
 					</xsl:call-template>
 					<!--<br/>-->
 					<table class="tbl_container">
@@ -724,48 +724,48 @@ if (CP && CP.lineTo){
 									<xsl:with-param name="allSheets" select="$listAll"/>
 								</xsl:call-template>
 							</th>
-						</tr>						
-                <xsl:choose>
-                  <xsl:when test="self::kp:Object">                    
-                      <xsl:call-template name="OBJ_FROM_EGRP"/>                     
-                  </xsl:when>
-                  <xsl:when  test="self::kp:Flat">
-                    <tr>
-                      <th>
-                        <!--<br/>-->
-                        <xsl:call-template name="HeadNumbers">
-                          <xsl:with-param name="pageNumber" select="1"/>
-                        </xsl:call-template>
-                      </th>
-                    </tr>
-                    <tr>
-                      <th>
-									    <xsl:call-template name="Flat"/>
-                      </th>
-                    </tr>
-                  </xsl:when>                  
-                  <xsl:otherwise>
-                    <tr>
-                      <th>
-                        <!--<br/>-->
-                        <xsl:call-template name="HeadNumbers">
-                          <xsl:with-param name="pageNumber" select="1"/>
-                        </xsl:call-template>
-                      </th>
-                    </tr>
-                    <tr>
-                      <th>
-									    <xsl:call-template name="notFlat"/>
-                    </th>
-                  </tr>
-                </xsl:otherwise>
-                </xsl:choose>              
+						</tr>
+								<xsl:choose>
+									<xsl:when test="self::kp:Object">
+											<xsl:call-template name="OBJ_FROM_EGRP"/>
+									</xsl:when>
+									<xsl:when test="self::kp:Flat">
+										<tr>
+											<th>
+												<!--<br/>-->
+												<xsl:call-template name="HeadNumbers">
+													<xsl:with-param name="pageNumber" select="1"/>
+												</xsl:call-template>
+											</th>
+										</tr>
+										<tr>
+											<th>
+											<xsl:call-template name="Flat"/>
+											</th>
+										</tr>
+									</xsl:when>
+									<xsl:otherwise>
+										<tr>
+											<th>
+												<!--<br/>-->
+												<xsl:call-template name="HeadNumbers">
+													<xsl:with-param name="pageNumber" select="1"/>
+												</xsl:call-template>
+											</th>
+										</tr>
+										<tr>
+											<th>
+											<xsl:call-template name="notFlat"/>
+										</th>
+									</tr>
+								</xsl:otherwise>
+								</xsl:choose>
 					</table>
 					<!--<xsl:call-template name="OKSBottom"/>-->
 				</th>
 			</tr>
 		</table>
-    <xsl:if test="$cadObj=0">
+		<xsl:if test="$cadObj=0">
 		<xsl:if test="descendant::kp:ConditionalPartLinear">
 			<xsl:if test="$list2p &gt; 0">
 				<xsl:call-template name="Form2p_Cycle">
@@ -816,19 +816,19 @@ if (CP && CP.lineTo){
 				</xsl:call-template>
 			</xsl:if>
 		</xsl:if>
-    <xsl:if test="$typeExtract != '010000'">
-    <xsl:if test="$list3 &gt; 0">
+		<xsl:if test="$typeExtract != '010000'">
+		<xsl:if test="$list3 &gt; 0">
 			<xsl:call-template name="Form3">
 				<xsl:with-param name="listAll" select="$listAll"/>
 			</xsl:call-template>
 		</xsl:if>
-    </xsl:if>
-    </xsl:if> 
+		</xsl:if>
+		</xsl:if>
 	</xsl:template>
-	
-	<xsl:template name="notFlat">		
+
+	<xsl:template name="notFlat">
 		<table class="tbl_section_topsheet">
-			<tr>				
+			<tr>
 				<th width="35%" class="left vtop">Адрес:</th>
 				<th class="left vtop" colspan="3">
 					<xsl:apply-templates select="kp:Address"/>
@@ -908,7 +908,7 @@ if (CP && CP.lineTo){
 							<xsl:text>площадь</xsl:text>
 						</xsl:if>
 						<xsl:if test="not(kp:Area) and not(kp:KeyParameters)">
-							  <xsl:text>данные отсутствуют</xsl:text>
+								<xsl:text>данные отсутствуют</xsl:text>
 						</xsl:if>
 					</td>
 					<td width="20%">
@@ -941,26 +941,26 @@ if (CP && CP.lineTo){
 				</tr>
 			</xsl:if>
 		<xsl:if test=".//descendant::kp:ObjectType='002001005000'">
-      <tr>
-        <th width="28%" class="left vtop">
-          <xsl:text>Степень готовности объекта незавершенного строительства, %:</xsl:text>          
-        </th>
-        <th class="left vtop" colspan="3">
-          <xsl:if test="kp:DegreeReadiness">
-            <xsl:value-of select="kp:DegreeReadiness"/>
-            <xsl:if test="not(kp:DegreeReadiness)">
-              <span class="left">
-                <xsl:text>данные отсутствуют</xsl:text>
-              </span>
-            </xsl:if>
-          </xsl:if>
-          <xsl:if test="not(kp:DegreeReadiness)">
-            <span class="left">
-              <xsl:text>данные отсутствуют</xsl:text>
-            </span>
-          </xsl:if>
-        </th>
-      </tr>
+			<tr>
+				<th width="28%" class="left vtop">
+					<xsl:text>Степень готовности объекта незавершенного строительства, %:</xsl:text>
+				</th>
+				<th class="left vtop" colspan="3">
+					<xsl:if test="kp:DegreeReadiness">
+						<xsl:value-of select="kp:DegreeReadiness"/>
+						<xsl:if test="not(kp:DegreeReadiness)">
+							<span class="left">
+								<xsl:text>данные отсутствуют</xsl:text>
+							</span>
+						</xsl:if>
+					</xsl:if>
+					<xsl:if test="not(kp:DegreeReadiness)">
+						<span class="left">
+							<xsl:text>данные отсутствуют</xsl:text>
+						</span>
+					</xsl:if>
+				</th>
+			</tr>
 		</xsl:if>
 		<xsl:if test="/kp:KPOKS/kp:Realty/kp:Uncompleted">
 			<tr>
@@ -980,7 +980,7 @@ if (CP && CP.lineTo){
 									<xsl:when test="$type='01' or $type='02' or $type='04' or $type='07'">м</xsl:when>
 									<xsl:when test="$type='05' or $type='06'">кв.м</xsl:when>
 									<xsl:when test="$type='03'">куб.м</xsl:when>
-								</xsl:choose>								
+								</xsl:choose>
 						</xsl:for-each>
 					</xsl:if>
 					<xsl:if test="not(/kp:KPOKS/kp:Realty/kp:Uncompleted/kp:KeyParameters)">
@@ -989,7 +989,7 @@ if (CP && CP.lineTo){
 				</th>
 			</tr>
 		</xsl:if>
-		<tr>				
+		<tr>
 				<th class="left vtop">
 					<xsl:choose>
 						<xsl:when test="/kp:KPOKS/kp:Realty/kp:Uncompleted"><xsl:text>Проектируемое назначение:</xsl:text></xsl:when>
@@ -1000,14 +1000,14 @@ if (CP && CP.lineTo){
 					<xsl:if test="kp:AssignationBuilding">
 						<xsl:variable name="var0" select="document('schema/KPOKS_v04/SchemaCommon/dAssBuilding_v01.xsd')"/>
 						<xsl:variable name="kod0" select="kp:AssignationBuilding"/>
-						<xsl:value-of select="$var0//xs:enumeration[@value=$kod0]/xs:annotation/xs:documentation"/>            
+						<xsl:value-of select="$var0//xs:enumeration[@value=$kod0]/xs:annotation/xs:documentation"/>
 						<xsl:if test="not(string($var0//xs:enumeration[@value=$kod0]/xs:annotation/xs:documentation))">
 							<xsl:text>данные отсутствуют</xsl:text>
 						</xsl:if>
 					</xsl:if>
 					<xsl:if test="kp:AssignationName">
 						<xsl:value-of select="kp:AssignationName"/>
-					</xsl:if>                    
+					</xsl:if>
 					<xsl:if test="not(kp:AssignationBuilding) and not(string(kp:AssignationName)) and not(string(kp:Assignation/ass:TotalAssets)='true') and not(string(kp:Assignation/ass:TotalAssets)='1')">
 						<xsl:text>данные отсутствуют</xsl:text>
 					</xsl:if>
@@ -1045,7 +1045,7 @@ if (CP && CP.lineTo){
 				</th>
 			</tr>
 			</xsl:if>
-      <!--<th width="28%" class="left vtop">
+			<!--<th width="28%" class="left vtop">
 					<xsl:text>Материал наружных стен:</xsl:text>
 				</th>
 				<th class="left vtop" colspan="3">
@@ -1070,7 +1070,7 @@ if (CP && CP.lineTo){
 				</th>
 			</tr>-->
 			<xsl:if test="not(/kp:KPOKS/kp:Realty/kp:Uncompleted)">
-			<tr>				
+			<tr>
 				<th width="28%" class="left vtop">
 					<xsl:text>Год ввода в эксплуатацию по завершении строительства:</xsl:text>
 				</th>
@@ -1083,7 +1083,7 @@ if (CP && CP.lineTo){
 			</tr>
 			</xsl:if>
 			<xsl:if test="not(/kp:KPOKS/kp:Realty/kp:Uncompleted)">
-			<tr>				
+			<tr>
 				<th width="28%" class="left vtop">
 					<xsl:text>Год завершения строительства:</xsl:text>
 				</th>
@@ -1095,7 +1095,7 @@ if (CP && CP.lineTo){
 				</th>
 			</tr>
 			</xsl:if>
-			<tr>				
+			<tr>
 				<th width="28%" class="left vtop">
 					<xsl:text>Кадастровая стоимость, руб.:</xsl:text>
 				</th>
@@ -1110,7 +1110,7 @@ if (CP && CP.lineTo){
 					</xsl:if>
 				</th>
 			</tr>
-			<tr>			
+			<tr>
 				<th width="28%" class="left vtop">
 					<xsl:text>Кадастровые номера иных объектов недвижимости, в пределах которых расположен объект недвижимости:</xsl:text>
 				</th>
@@ -1128,8 +1128,8 @@ if (CP && CP.lineTo){
 					</xsl:if>
 				</th>
 			</tr>
-			<xsl:if test="not(/kp:KPOKS/kp:Realty/kp:Uncompleted)">		
-			<tr>				
+			<xsl:if test="not(/kp:KPOKS/kp:Realty/kp:Uncompleted)">
+			<tr>
 				<th width="28%" class="left vtop">
 					<xsl:text>Кадастровые номера помещений, машино-мест, расположенных в здании или сооружении:</xsl:text>
 				</th>
@@ -1147,7 +1147,7 @@ if (CP && CP.lineTo){
 					</xsl:if>
 				</th>
 			</tr>
-			</xsl:if>		
+			</xsl:if>
 		<!--><tr>
 				<th width="5%" class="left vtop" rowspan="2">
 					<xsl:text>13</xsl:text>
@@ -1200,37 +1200,37 @@ if (CP && CP.lineTo){
 			<th class="left vtop">
 				<xsl:text>Статус записи об объекте недвижимости: </xsl:text>
 			</th>
-        <th colspan="3">
-          <xsl:if test="@State='05'">
-            <xsl:text>Сведения об объекте недвижимости имеют статус "временные"</xsl:text>
-            <xsl:if test="@DateExpiry">
-              <xsl:text>. Дата истечения срока действия временного характера - </xsl:text>
-              <xsl:apply-templates select="@DateExpiry" mode="digitsXmlWithoutYear"/>
-            </xsl:if>
-          </xsl:if>
-          <xsl:if test="@State='07' or @State='08'">
-            <xsl:text>Объект недвижимости снят с кадастрового учета - </xsl:text>
-            <xsl:apply-templates select="@DateRemoved" mode="digitsXmlWithoutYear"/>
-          </xsl:if>
-          <xsl:if test="@State='06'">
-            <xsl:text>Сведения об объекте недвижимости имеют статус "актуальные"</xsl:text>
-          </xsl:if>
-          <xsl:if test="@State='01'">
-            <xsl:text>Сведения об объекте недвижимости имеют статус "актуальные, ранее учтенные"</xsl:text>
-          </xsl:if>
-          <xsl:if test="not(@State)">
-            <xsl:text>данные отсутствуют</xsl:text>
-          </xsl:if>
-        </th>
-      </tr>
-			<tr>				
+				<th colspan="3">
+					<xsl:if test="@State='05'">
+						<xsl:text>Сведения об объекте недвижимости имеют статус "временные"</xsl:text>
+						<xsl:if test="@DateExpiry">
+							<xsl:text>. Дата истечения срока действия временного характера - </xsl:text>
+							<xsl:apply-templates select="@DateExpiry" mode="digitsXmlWithoutYear"/>
+						</xsl:if>
+					</xsl:if>
+					<xsl:if test="@State='07' or @State='08'">
+						<xsl:text>Объект недвижимости снят с кадастрового учета - </xsl:text>
+						<xsl:apply-templates select="@DateRemoved" mode="digitsXmlWithoutYear"/>
+					</xsl:if>
+					<xsl:if test="@State='06'">
+						<xsl:text>Сведения об объекте недвижимости имеют статус "актуальные"</xsl:text>
+					</xsl:if>
+					<xsl:if test="@State='01'">
+						<xsl:text>Сведения об объекте недвижимости имеют статус "актуальные, ранее учтенные"</xsl:text>
+					</xsl:if>
+					<xsl:if test="not(@State)">
+						<xsl:text>данные отсутствуют</xsl:text>
+					</xsl:if>
+				</th>
+			</tr>
+			<tr>
 				<th class="left vtop">
 					<xsl:text>Особые отметки:</xsl:text>
 				</th>
 				<th class="left vtop" colspan="3">
 					<xsl:variable name="count4">
 						<xsl:choose>
-							<xsl:when  test="self::kp:Flat">
+							<xsl:when test="self::kp:Flat">
 								<xsl:value-of select="1"/>
 							</xsl:when>
 							<xsl:otherwise>
@@ -1240,7 +1240,7 @@ if (CP && CP.lineTo){
 					</xsl:variable>
 					<xsl:variable name="count5">
 						<xsl:choose>
-							<xsl:when  test="self::kp:Flat">
+							<xsl:when test="self::kp:Flat">
 								<xsl:value-of select="count($Flat/kp:SubFlats | $Flat//kp:Plans)"/>
 							</xsl:when>
 							<xsl:otherwise>
@@ -1376,33 +1376,33 @@ if (CP && CP.lineTo){
 					</table>
 				</td>
 			</tr>-->
-      <tr>
-        <th style="text-align:left">
-          <xsl:text>Получатель выписки: </xsl:text>
-        </th>
-        <th style="text-align:left" colspan="3">
-          <xsl:value-of select="$FootContent/kp:Recipient"/>
-        </th>
-      </tr>
+			<tr>
+				<th style="text-align:left">
+					<xsl:text>Получатель выписки: </xsl:text>
+				</th>
+				<th style="text-align:left" colspan="3">
+					<xsl:value-of select="$FootContent/kp:Recipient"/>
+				</th>
+			</tr>
 		</table>
-    <xsl:call-template name="OKSBottom"/>
-    <xsl:if test="$SExtract/kp:ExtractObject">
-      <xsl:call-template name="Extract">
-        <xsl:with-param name="Extract"/>
-      </xsl:call-template>
-    </xsl:if>
-  </xsl:template>
-	
-	<xsl:template name="Flat">		
+		<xsl:call-template name="OKSBottom"/>
+		<xsl:if test="$SExtract/kp:ExtractObject">
+			<xsl:call-template name="Extract">
+				<xsl:with-param name="Extract"/>
+			</xsl:call-template>
+		</xsl:if>
+	</xsl:template>
+
+	<xsl:template name="Flat">
 		<table class="tbl_section_topsheet">
-      <tr>
-        <th width="55%" class="left vtop">
-          <xsl:text>Адрес:</xsl:text>
-        </th>
-        <th class="vtop">
-          <xsl:apply-templates select="kp:Address"/>
-        </th>
-      </tr>
+			<tr>
+				<th width="55%" class="left vtop">
+					<xsl:text>Адрес:</xsl:text>
+				</th>
+				<th class="vtop">
+					<xsl:apply-templates select="kp:Address"/>
+				</th>
+			</tr>
 			<tr>
 				<th class="left vtop">
 					<xsl:text>Площадь, м&sup2;:</xsl:text>
@@ -1416,7 +1416,7 @@ if (CP && CP.lineTo){
 				<th class="vtop">
 					<xsl:choose>
 						<xsl:when test="kp:Assignation/ass:AssignationCode=206001000000"><xsl:text>Нежилое помещение</xsl:text></xsl:when>
-            <xsl:when test="kp:Assignation/ass:AssignationCode=206002000000"><xsl:text>Жилое помещение</xsl:text></xsl:when>
+						<xsl:when test="kp:Assignation/ass:AssignationCode=206002000000"><xsl:text>Жилое помещение</xsl:text></xsl:when>
 						<xsl:otherwise>
 							<xsl:if test="kp:Assignation/ass:AssignationType">
 								<xsl:variable name="var2" select="document('schema/KPOKS_v04/SchemaCommon/dAssFlatType_v01.xsd')"/>
@@ -1434,88 +1434,88 @@ if (CP && CP.lineTo){
 				</th>
 			</tr>
 
-      <tr>
-        <th class="left vtop">
-          <xsl:text>Назначение:</xsl:text>
-        </th>
-        <th>
-          <xsl:variable name="var1" select="document('schema/KPOKS_v04/SchemaCommon/dAssFlat_v01.xsd')"/>
-          <xsl:variable name="kod1" select="kp:Assignation/ass:AssignationCode"/>
-          <xsl:value-of select="$var1//xs:enumeration[@value=$kod1]/xs:annotation/xs:documentation"/>
-          <xsl:if test="string(kp:Assignation/ass:TotalAssets)='true' or string(kp:Assignation/ass:TotalAssets)='1'">
-            <xsl:if test="kp:AssignationName or kp:Assignation/ass:AssignationCode">
-              <xsl:text>; </xsl:text>
-            </xsl:if>
-            <xsl:text>общее имущество собственников помещений в многоквартирном доме</xsl:text>
-          </xsl:if>
-          <xsl:if test="not(string($var1//xs:enumeration[@value=$kod1]/xs:annotation/xs:documentation)) and not(string(kp:Assignation/ass:TotalAssets)='true') and not(string(kp:Assignation/ass:TotalAssets)='1')">
-            <xsl:call-template name="procherk"/>
-          </xsl:if>
-        </th>
-      </tr>
-      <tr>
-        <th class="left vtop">
-          <xsl:text>Номер этажа, на котором расположено помещение, машино-место:</xsl:text>
-        </th>
-        <th class="vtop">
-          <xsl:if test="kp:PositionInObject/kp:Levels">
-            <xsl:variable name="var0" select="document('schema/KPOKS_v04/SchemaCommon/dTypeStorey_v01.xsd')"/>
-            <xsl:for-each select="kp:PositionInObject/kp:Levels/kp:Level">
-              <xsl:if test="not(./@Type='17')">
-                <xsl:variable name="kod0" select="./@Type"/>
-                <xsl:value-of select="$var0//xs:enumeration[@value=$kod0]/xs:annotation/xs:documentation"/>
-                <xsl:if test="not(string($var0//xs:enumeration[@value=$kod0]/xs:annotation/xs:documentation))">
-                  <xsl:call-template name="procherk"/>
-                </xsl:if>
-                <xsl:text> </xsl:text>
-              </xsl:if>
-              <xsl:value-of select="concat('№ ', ./@Number)"/>
-              <xsl:if test="position()!=last()">, </xsl:if>
-            </xsl:for-each>
-          </xsl:if>
-          <xsl:if test="not(kp:PositionInObject/kp:Levels)">
-            <xsl:call-template name="procherk"/>
-          </xsl:if>
-        </th>
-      </tr>
-      <tr>
-        <th class="left vtop">
-          <xsl:text>Вид жилого помещения:</xsl:text>
-        </th>
-        <th>
-          <xsl:if test="kp:Assignation/ass:AssignationType">
-            <xsl:variable name="var2" select="document('schema/KPOKS_v04/SchemaCommon/dAssFlatType_v01.xsd')"/>
-            <xsl:variable name="kod2" select="kp:Assignation/ass:AssignationType"/>
-            <xsl:value-of select="$var2//xs:enumeration[@value=$kod2]/xs:annotation/xs:documentation"/>
-            <xsl:if test="not(string($var2//xs:enumeration[@value=$kod2]/xs:annotation/xs:documentation))">
-              <xsl:call-template name="procherk"/>
-            </xsl:if>
-          </xsl:if>
-          <xsl:if test="not(kp:Assignation/ass:AssignationType)">
-            <!--<xsl:call-template name="procherk"/>-->
-            <xsl:text>данные отсутствуют</xsl:text>
-          </xsl:if>
-        </th>
-      </tr>
-      <tr>
-        <th class="left vtop">
-          <nobr>Кадастровая стоимость (руб.):</nobr>
-        </th>
-        <th>
-          <xsl:if test="kp:CadastralCost">
-            <xsl:value-of select="kp:CadastralCost/@Value"/>
-          </xsl:if>
-          <xsl:if test="not(kp:CadastralCost)">
-            <span class="center">
-              <xsl:text>данные отсутствуют</xsl:text>
-            </span>
-          </xsl:if>
-        </th>
-      </tr>
-      <tr>
-        <th class="left vtop">
-          <xsl:text>Кадастровые номера иных объектов недвижимости, в пределах которых расположен объект недвижимости: </xsl:text>
-        </th>
+			<tr>
+				<th class="left vtop">
+					<xsl:text>Назначение:</xsl:text>
+				</th>
+				<th>
+					<xsl:variable name="var1" select="document('schema/KPOKS_v04/SchemaCommon/dAssFlat_v01.xsd')"/>
+					<xsl:variable name="kod1" select="kp:Assignation/ass:AssignationCode"/>
+					<xsl:value-of select="$var1//xs:enumeration[@value=$kod1]/xs:annotation/xs:documentation"/>
+					<xsl:if test="string(kp:Assignation/ass:TotalAssets)='true' or string(kp:Assignation/ass:TotalAssets)='1'">
+						<xsl:if test="kp:AssignationName or kp:Assignation/ass:AssignationCode">
+							<xsl:text>; </xsl:text>
+						</xsl:if>
+						<xsl:text>общее имущество собственников помещений в многоквартирном доме</xsl:text>
+					</xsl:if>
+					<xsl:if test="not(string($var1//xs:enumeration[@value=$kod1]/xs:annotation/xs:documentation)) and not(string(kp:Assignation/ass:TotalAssets)='true') and not(string(kp:Assignation/ass:TotalAssets)='1')">
+						<xsl:call-template name="procherk"/>
+					</xsl:if>
+				</th>
+			</tr>
+			<tr>
+				<th class="left vtop">
+					<xsl:text>Номер этажа, на котором расположено помещение, машино-место:</xsl:text>
+				</th>
+				<th class="vtop">
+					<xsl:if test="kp:PositionInObject/kp:Levels">
+						<xsl:variable name="var0" select="document('schema/KPOKS_v04/SchemaCommon/dTypeStorey_v01.xsd')"/>
+						<xsl:for-each select="kp:PositionInObject/kp:Levels/kp:Level">
+							<xsl:if test="not(./@Type='17')">
+								<xsl:variable name="kod0" select="./@Type"/>
+								<xsl:value-of select="$var0//xs:enumeration[@value=$kod0]/xs:annotation/xs:documentation"/>
+								<xsl:if test="not(string($var0//xs:enumeration[@value=$kod0]/xs:annotation/xs:documentation))">
+									<xsl:call-template name="procherk"/>
+								</xsl:if>
+								<xsl:text> </xsl:text>
+							</xsl:if>
+							<xsl:value-of select="concat('№ ', ./@Number)"/>
+							<xsl:if test="position()!=last()">, </xsl:if>
+						</xsl:for-each>
+					</xsl:if>
+					<xsl:if test="not(kp:PositionInObject/kp:Levels)">
+						<xsl:call-template name="procherk"/>
+					</xsl:if>
+				</th>
+			</tr>
+			<tr>
+				<th class="left vtop">
+					<xsl:text>Вид жилого помещения:</xsl:text>
+				</th>
+				<th>
+					<xsl:if test="kp:Assignation/ass:AssignationType">
+						<xsl:variable name="var2" select="document('schema/KPOKS_v04/SchemaCommon/dAssFlatType_v01.xsd')"/>
+						<xsl:variable name="kod2" select="kp:Assignation/ass:AssignationType"/>
+						<xsl:value-of select="$var2//xs:enumeration[@value=$kod2]/xs:annotation/xs:documentation"/>
+						<xsl:if test="not(string($var2//xs:enumeration[@value=$kod2]/xs:annotation/xs:documentation))">
+							<xsl:call-template name="procherk"/>
+						</xsl:if>
+					</xsl:if>
+					<xsl:if test="not(kp:Assignation/ass:AssignationType)">
+						<!--<xsl:call-template name="procherk"/>-->
+						<xsl:text>данные отсутствуют</xsl:text>
+					</xsl:if>
+				</th>
+			</tr>
+			<tr>
+				<th class="left vtop">
+					<nobr>Кадастровая стоимость (руб.):</nobr>
+				</th>
+				<th>
+					<xsl:if test="kp:CadastralCost">
+						<xsl:value-of select="kp:CadastralCost/@Value"/>
+					</xsl:if>
+					<xsl:if test="not(kp:CadastralCost)">
+						<span class="center">
+							<xsl:text>данные отсутствуют</xsl:text>
+						</span>
+					</xsl:if>
+				</th>
+			</tr>
+			<tr>
+				<th class="left vtop">
+					<xsl:text>Кадастровые номера иных объектов недвижимости, в пределах которых расположен объект недвижимости: </xsl:text>
+				</th>
 		<th class="vtop">
 			<xsl:if test="kp:ParentCadastralNumbers/kp:CadastralNumberOKS">
 				<xsl:value-of select="kp:ParentCadastralNumbers/kp:CadastralNumberOKS"/>
@@ -1528,7 +1528,7 @@ if (CP && CP.lineTo){
 				<xsl:text>данные отсутствуют</xsl:text>
 			</xsl:if>
 		</th>
-      </tr>      
+			</tr>
 			<!--<tr>
 				<th width="5%" class="left vtop">
 					<xsl:text>7</xsl:text>
@@ -1546,7 +1546,7 @@ if (CP && CP.lineTo){
 						<xsl:call-template name="procherk"/>
 					</xsl:if>
 				</th>
-			</tr>	-->	
+			</tr>	-->
 			<!--<tr>
 				<xsl:element name="th">
 					<xsl:attribute name="width">5%</xsl:attribute>
@@ -1655,7 +1655,7 @@ if (CP && CP.lineTo){
 					</th>
 				</tr>
 			</xsl:if>-->
-      <tr>
+			<tr>
 			<tr>
 				<th class="left vtop"><xsl:text>Виды разрешенного использования: </xsl:text></th>
 				<th><span class="left"><xsl:text>данные отсутствуют</xsl:text></span><!-- TODO --></th>
@@ -1669,32 +1669,32 @@ if (CP && CP.lineTo){
 				</th>
 				<th><span class="left"><xsl:text>данные отсутствуют</xsl:text></span></th>
 			</tr>
-        <th class="left vtop" >
-          <xsl:text>Статус записи об объекте недвижимости): </xsl:text>
-        </th>
-        <th colspan="3">
-          <xsl:if test="@State='05'">
-            <xsl:text>Сведения об объекте недвижимости имеют статус "временные"</xsl:text>
-            <xsl:if test="@DateExpiry">
-              <xsl:text>. Дата истечения срока действия временного характера - </xsl:text>
-              <xsl:apply-templates select="@DateExpiry" mode="digitsXmlWithoutYear"/>
-            </xsl:if>
-          </xsl:if>
-          <xsl:if test="@State='07' or @State='08'">
-            <xsl:text>Объект недвижимости снят с кадастрового учета - </xsl:text>
-            <xsl:apply-templates select="@DateRemoved" mode="digitsXmlWithoutYear"/>
-          </xsl:if>
-          <xsl:if test="@State='06'">
-            <xsl:text>Сведения об объекте недвижимости имеют статус "актуальные"</xsl:text>
-          </xsl:if>
-          <xsl:if test="@State='01'">
-            <xsl:text>Сведения об объекте недвижимости имеют статус "актуальные, ранее учтенные"</xsl:text>
-          </xsl:if>
-          <xsl:if test="not(@State)">
-            <xsl:call-template name="procherk"/>
-          </xsl:if>
-        </th>
-      </tr>
+				<th class="left vtop" >
+					<xsl:text>Статус записи об объекте недвижимости): </xsl:text>
+				</th>
+				<th colspan="3">
+					<xsl:if test="@State='05'">
+						<xsl:text>Сведения об объекте недвижимости имеют статус "временные"</xsl:text>
+						<xsl:if test="@DateExpiry">
+							<xsl:text>. Дата истечения срока действия временного характера - </xsl:text>
+							<xsl:apply-templates select="@DateExpiry" mode="digitsXmlWithoutYear"/>
+						</xsl:if>
+					</xsl:if>
+					<xsl:if test="@State='07' or @State='08'">
+						<xsl:text>Объект недвижимости снят с кадастрового учета - </xsl:text>
+						<xsl:apply-templates select="@DateRemoved" mode="digitsXmlWithoutYear"/>
+					</xsl:if>
+					<xsl:if test="@State='06'">
+						<xsl:text>Сведения об объекте недвижимости имеют статус "актуальные"</xsl:text>
+					</xsl:if>
+					<xsl:if test="@State='01'">
+						<xsl:text>Сведения об объекте недвижимости имеют статус "актуальные, ранее учтенные"</xsl:text>
+					</xsl:if>
+					<xsl:if test="not(@State)">
+						<xsl:call-template name="procherk"/>
+					</xsl:if>
+				</th>
+			</tr>
 			<tr>
 				<th class="left vtop">
 					<xsl:text>Особые отметки:</xsl:text>
@@ -1702,7 +1702,7 @@ if (CP && CP.lineTo){
 				<th colspan="3">
 					<xsl:variable name="count4">
 						<xsl:choose>
-							<xsl:when  test="self::kp:Flat">
+							<xsl:when test="self::kp:Flat">
 								<xsl:value-of select="1"/>
 							</xsl:when>
 							<xsl:otherwise>
@@ -1712,7 +1712,7 @@ if (CP && CP.lineTo){
 					</xsl:variable>
 					<xsl:variable name="count5">
 						<xsl:choose>
-							<xsl:when  test="self::kp:Flat">
+							<xsl:when test="self::kp:Flat">
 								<xsl:value-of select="count($Flat/kp:SubFlats | $Flat//kp:Plans)"/>
 							</xsl:when>
 							<xsl:otherwise>
@@ -1743,14 +1743,14 @@ if (CP && CP.lineTo){
 					</xsl:if>
 				</th>
 			</tr>
-      <tr>
-        <th style="text-align:left">
-          <xsl:text>Получатель выписки: </xsl:text>
-        </th>
-        <th style="text-align:left" colspan="3">
-          <xsl:value-of select="$FootContent/kp:Recipient"/>
-        </th>
-      </tr>
+			<tr>
+				<th style="text-align:left">
+					<xsl:text>Получатель выписки: </xsl:text>
+				</th>
+				<th style="text-align:left" colspan="3">
+					<xsl:value-of select="$FootContent/kp:Recipient"/>
+				</th>
+			</tr>
 			<!--<tr>
 				<th class="left vtop" colspan="4">
 					<xsl:if test="kp:Notes">
@@ -1767,7 +1767,7 @@ if (CP && CP.lineTo){
 					</xsl:if>
 				</th>
 			</tr>-->
-			
+
 		<!--	<tr>
 				<th width="5%" class="left vtop" rowspan="2">
 					<xsl:text>11</xsl:text>
@@ -1913,308 +1913,308 @@ if (CP && CP.lineTo){
 						</tr>
 					</table>
 				</td>
-			</tr>-->      
+			</tr>-->
 		</table>
-    <xsl:call-template name="OKSBottom"/>
-    <xsl:if test="$SExtract/kp:ExtractObject">
-    <xsl:call-template name="Extract">
-      <xsl:with-param name="Extract"/>
-    </xsl:call-template>
-    </xsl:if>   
+		<xsl:call-template name="OKSBottom"/>
+		<xsl:if test="$SExtract/kp:ExtractObject">
+		<xsl:call-template name="Extract">
+			<xsl:with-param name="Extract"/>
+		</xsl:call-template>
+		</xsl:if>
 	</xsl:template>
 
-  <xsl:template name="OBJ_FROM_EGRP">
-    <xsl:variable name="ObjType" select="kp:ObjectType"/>
-    <xsl:variable name="AssigCode" select="kp:Assignation_Code"/>
-    <xsl:variable name="ObjTypeText" select="kp:ObjectTypeText"/>
-    <table class="t" border="1" cellpadding="2" cellspacing="0" width="100%">
-      <tr>
-            <td width="35%" style="text-align:left">
-           <!-- <th width="50%" class="left vtop">-->
-              <xsl:text>Номер кадастрового квартала:</xsl:text>
-            </td>
-            <td style="text-align:left">
-              <xsl:call-template name="procherk"/>
-            </td>
-          </tr>
-      <tr>
-        <td style="text-align:left">
-          <xsl:text>Дата присвоения кадастрового номера: </xsl:text>
-        </td>
-        <td style="text-align:left">
-          <xsl:call-template name="procherk"/>
-        </td>
-      </tr>
-      <tr>
-        <td style="text-align:left">
-          <xsl:text>Ранее присвоенный государственный учетный номер: </xsl:text>
-        </td>
-        <td style="text-align:left">
-          <xsl:choose>
-            <xsl:when test="kp:ConditionalNumber">
-              <xsl:apply-templates select="kp:ConditionalNumber"/>
-            </xsl:when>            
-            <xsl:otherwise>
-              <xsl:call-template name="procherk"/>
-            </xsl:otherwise>
-          </xsl:choose>
-        </td>
-      </tr>
-      <tr>
-        <td style="text-align:left">
-          <xsl:text>Адрес: </xsl:text>
-        </td>
-        <td style="text-align:left">
-          <xsl:apply-templates select="kp:Address/kp:Content"/>
-          <xsl:if test="not(kp:Address/kp:Content)">
-            <xsl:call-template name="procherk"/>
-          </xsl:if>
-        </td>
-      </tr>
-      <xsl:if test="$ObjType!='002002000000'">
-        <!--это не ПИК и не ЕНК-->
-        <tr>
-          <td style="text-align:left">
-            <xsl:choose>
-              <xsl:when test="$ObjType='002002004000'">
-                <!--сооружение-->
-                <xsl:text>Основная характеристика (для сооружения):</xsl:text>
-              </xsl:when>
-              <xsl:when test="$ObjType='002002005000'">
-                <!--объект незавершенного строительства-->
-                <xsl:text>Степень готовности объекта незавершенного строительства,%:</xsl:text>
-              </xsl:when>
-              <xsl:otherwise>
-                <xsl:text>Площадь, м2: </xsl:text>
-              </xsl:otherwise>
-            </xsl:choose>
-          </td>
-          <td style="text-align:left">
-            <xsl:apply-templates select="kp:Area/kp:AreaText"/>
-            <xsl:if test="not(kp:Area/kp:AreaText)">
-              <xsl:call-template name="procherk"/>
-            </xsl:if>
-          </td>
-        </tr>
-        <xsl:if test="$ObjType='002002005000'">
-          <!--объект незавершенного строительства-->
-          <tr>
-            <td style="text-align:left">
-              <xsl:text>Основная характеристика объекта незавершенного строительства и ее проектируемое значение:</xsl:text>
-            </td>
-            <td>"&#160;"</td>
-          </tr>
-        </xsl:if>
-      </xsl:if>
-      <tr>
-        <td style="text-align:left">
-          <xsl:choose>
-            <xsl:when test="$ObjType='002002005000'">
-              <!--объект незавершенного строительства-->
-              <xsl:text>Проектируемое назначение:</xsl:text>
-            </xsl:when>
-            <xsl:otherwise>
-              <xsl:text>Назначение:</xsl:text>
-            </xsl:otherwise>
-          </xsl:choose>
-        </td>
-        <td style="text-align:left">
-          <xsl:apply-templates select="kp:Assignation_Code_Text"/>
-          <xsl:if test="not(kp:Assignation_Code_Text)">
-            <xsl:call-template name="procherk"/>
-          </xsl:if>
-        </td>
-      </tr>
-      <tr>
-         <td style="text-align:left">
-          <xsl:text>Наименование:</xsl:text>
-        </td>
-        <td style="text-align:left">
-          <xsl:apply-templates select="kp:Name"/>
-          <xsl:if test="not(kp:Name)">
-            <xsl:call-template name="procherk"/>
-          </xsl:if>
-        </td>
-      </tr>
-      <xsl:if test="$ObjType='002002001000' or $ObjType='002002004000'">
-        <!--здание или сооружение-->
-        <tr>
-          <td style="text-align:left">
-            <xsl:text>Количество этажей, в том числе подземных этажей:</xsl:text>
-          </td>
-          <td style="text-align:left">
-            <xsl:apply-templates select="kp:Floor"/>
-            <xsl:if test="not(kp:Floor)">
-              <xsl:call-template name="procherk"/>
-            </xsl:if>
-          </td>
-        </tr>
-      </xsl:if>
-      <xsl:if test="$ObjType='002002002000'">
-        <!--помещение-->
-        <tr>
-          <td style="text-align:left">
-            <xsl:text>Номер этажа, на котором расположено помещение, машино-место:</xsl:text>
-          </td>
-          <td style="text-align:left">
-            <xsl:apply-templates select="kp:Floor"/>
-            <xsl:if test="not(kp:Floor)">
-              <xsl:call-template name="procherk"/>
-            </xsl:if>
-          </td>
-        </tr>
-      </xsl:if>
-      <xsl:if test="$ObjType='002002002000' and $AssigCode=005001000000">
-        <!--жилое помещение-->
-        <tr>
-          <td style="text-align:left">
-            <xsl:text>Вид жилого помещения:</xsl:text>
-          </td>
-          <td style="text-align:left">
-            <xsl:call-template name="procherk"/>
-          </td>
-        </tr>
-      </xsl:if>
-      <xsl:if test="$ObjType='002002001000' or $ObjType='002002004000'">
-        <!--здание или сооружение-->
-        <tr>
-          <td style="text-align:left">
-            <xsl:text>Год ввода в эксплуатацию:</xsl:text>
-          </td>
-          <td style="text-align:left">
-            <xsl:call-template name="procherk"/>
-          </td>
-        </tr>
-        <tr>
-          <td style="text-align:left">
-            <xsl:text>Год завершения строительства:</xsl:text>
-          </td>
-          <td style="text-align:left">
-            <xsl:call-template name="procherk"/>
-          </td>
-        </tr>
-      </xsl:if>
-      <tr>
-        <td style="text-align:left">
-          <xsl:text>Кадастровая стоимость:</xsl:text>
-        </td>
-        <td style="text-align:left">
-          <xsl:call-template name="procherk"/>
-        </td>
-      </tr>     
-      <xsl:if test="$ObjType!='002002000000'">
-          <!--это ПИК или ЕНК-->
-        <tr>  
-        <td style="text-align:left">
-          <xsl:text>Кадастровые номера иных объектов недвижимости, в пределах которых расположен объект недвижимости: </xsl:text>
-        </td>
-        <td style="text-align:left">
-          <xsl:call-template name="procherk"/>
-        </td>
-      </tr>
-      </xsl:if> 
-      <xsl:if test="$ObjType='002002001000' or $ObjType='002002004000'">
-        <!--здание или сооружение-->
-        <tr>
-          <td style="text-align:left">
-            <xsl:text>Кадастровые номера помещений, машино-мест, расположенных в здании или сооружении:</xsl:text>
-          </td>
-          <td style="text-align:left">
-            <xsl:call-template name="procherk"/>
-          </td>
-        </tr>
-      </xsl:if>
-      <xsl:if test="$ObjType='002002000000'">
-        <!--это ПИК или ЕНК-->
-        <tr>
-          <td style="text-align:left">
-            <xsl:text>Кадастровые номера объектов недвижимости, входящих в состав единого недвижимого комплекса, предприятия как имущественный комплекс:</xsl:text>
-          </td>
-          <td style="text-align:left">
-            <xsl:call-template name="Panel">
-              <xsl:with-param name="Text">
-                <xsl:choose>
-                  <xsl:when test="kp:Complex/kp:Explication">
-                    <xsl:for-each select="kp:Complex/kp:Explication">
-                      <xsl:if test="not(position()=1)">
-                        <xsl:text>; </xsl:text>
-                      </xsl:if>
-                      <xsl:call-template name="Value">
-                        <xsl:with-param name="Node" select="."/>
-                      </xsl:call-template>
-                    </xsl:for-each>
-                  </xsl:when>
-                  <xsl:otherwise>
-                    <xsl:text>Объекты недвижимого имущества отсутствуют</xsl:text>
-                  </xsl:otherwise>
-                </xsl:choose>
-              </xsl:with-param>
-            </xsl:call-template>
-          </td>
-        </tr>
-      </xsl:if>
-      <xsl:if test="$ObjType='002002000000' and $ObjTypeText='Единый недвижимый комплекс'">
-        <!--ЕНК-->
-        <tr>
-          <td style="text-align:left">
-            <xsl:text>Кадастровый номер земельного участка, если входящие в состав единого недвижимого комплекса объекты недвижимости расположены на одном участке:</xsl:text>
-          </td>
-          <td style="text-align:left">
-            <xsl:call-template name="procherk"/>
-          </td>
-        </tr>
-      </xsl:if>
-      <xsl:if test="$ObjType='002002002000' and $AssigCode=005001000000">
-        <!--жилое помещение-->
-        <tr>
-          <td style="text-align:left">
-            <xsl:text>Сведения об отнесении жилого помещения к определенному виду жилых помещений специализированного жилищного фонда, к жилым помещениям наемного дома социального использования или наемного дома коммерческого использования:</xsl:text>
-          </td>
-          <td style="text-align:left">
-            <xsl:call-template name="procherk"/>
-          </td>
-        </tr>
-      </xsl:if>
-      <tr>
-        <td style="text-align:left">
-          <xsl:text>Статус записи об объекте недвижимости: </xsl:text>
-        </td>
-        <td style="text-align:left">
-          <xsl:call-template name="procherk"/>
-        </td>
-      </tr>
-      <tr>
-        <td style="text-align:left">
-          <xsl:text>Особые отметки:</xsl:text>
-        </td>
-        <td style="text-align:left">
-          <xsl:text>Сведения об объекте недвижимости сформированы по данным, ранее внесенным в Единый государственный реестр прав.</xsl:text>
-          <br/>
-          <xsl:if test="$ObjType!='002002000000'">
-            <!--это НЕ ПИК или ЕНК-->
-            <xsl:text>Сведения необходимые для заполнения раздела 3 отсутствуют.</xsl:text>
-          </xsl:if>
-          <xsl:if test="$ObjType='002002000000' and $ObjTypeText='Единый недвижимый комплекс'">
-            <!--это ЕНК-->
-            <xsl:text>Сведения, необходимые  для заполнения Раздела 4 "Описание местоположения объекта недвижимости", отсутствуют.</xsl:text>
-          </xsl:if>  
-        </td>
-      </tr>
-      <tr>
-        <td style="text-align:left">
-          <xsl:text>Получатель выписки: </xsl:text>
-        </td>
-        <td style="text-align:left">
-          <xsl:value-of select="$FootContent/kp:Recipient"/>
-        </td>
-      </tr>
-        </table>
-    <xsl:call-template name="OKSBottom"/>
-    <xsl:call-template name="Extract">
-      <xsl:with-param name="Extract"/>
-    </xsl:call-template>
-  </xsl:template>
-	
+	<xsl:template name="OBJ_FROM_EGRP">
+		<xsl:variable name="ObjType" select="kp:ObjectType"/>
+		<xsl:variable name="AssigCode" select="kp:Assignation_Code"/>
+		<xsl:variable name="ObjTypeText" select="kp:ObjectTypeText"/>
+		<table class="t" border="1" cellpadding="2" cellspacing="0" width="100%">
+			<tr>
+						<td width="35%" style="text-align:left">
+					 <!-- <th width="50%" class="left vtop">-->
+							<xsl:text>Номер кадастрового квартала:</xsl:text>
+						</td>
+						<td style="text-align:left">
+							<xsl:call-template name="procherk"/>
+						</td>
+					</tr>
+			<tr>
+				<td style="text-align:left">
+					<xsl:text>Дата присвоения кадастрового номера: </xsl:text>
+				</td>
+				<td style="text-align:left">
+					<xsl:call-template name="procherk"/>
+				</td>
+			</tr>
+			<tr>
+				<td style="text-align:left">
+					<xsl:text>Ранее присвоенный государственный учетный номер: </xsl:text>
+				</td>
+				<td style="text-align:left">
+					<xsl:choose>
+						<xsl:when test="kp:ConditionalNumber">
+							<xsl:apply-templates select="kp:ConditionalNumber"/>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:call-template name="procherk"/>
+						</xsl:otherwise>
+					</xsl:choose>
+				</td>
+			</tr>
+			<tr>
+				<td style="text-align:left">
+					<xsl:text>Адрес: </xsl:text>
+				</td>
+				<td style="text-align:left">
+					<xsl:apply-templates select="kp:Address/kp:Content"/>
+					<xsl:if test="not(kp:Address/kp:Content)">
+						<xsl:call-template name="procherk"/>
+					</xsl:if>
+				</td>
+			</tr>
+			<xsl:if test="$ObjType!='002002000000'">
+				<!--это не ПИК и не ЕНК-->
+				<tr>
+					<td style="text-align:left">
+						<xsl:choose>
+							<xsl:when test="$ObjType='002002004000'">
+								<!--сооружение-->
+								<xsl:text>Основная характеристика (для сооружения):</xsl:text>
+							</xsl:when>
+							<xsl:when test="$ObjType='002002005000'">
+								<!--объект незавершенного строительства-->
+								<xsl:text>Степень готовности объекта незавершенного строительства,%:</xsl:text>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:text>Площадь, м2: </xsl:text>
+							</xsl:otherwise>
+						</xsl:choose>
+					</td>
+					<td style="text-align:left">
+						<xsl:apply-templates select="kp:Area/kp:AreaText"/>
+						<xsl:if test="not(kp:Area/kp:AreaText)">
+							<xsl:call-template name="procherk"/>
+						</xsl:if>
+					</td>
+				</tr>
+				<xsl:if test="$ObjType='002002005000'">
+					<!--объект незавершенного строительства-->
+					<tr>
+						<td style="text-align:left">
+							<xsl:text>Основная характеристика объекта незавершенного строительства и ее проектируемое значение:</xsl:text>
+						</td>
+						<td>"&#160;"</td>
+					</tr>
+				</xsl:if>
+			</xsl:if>
+			<tr>
+				<td style="text-align:left">
+					<xsl:choose>
+						<xsl:when test="$ObjType='002002005000'">
+							<!--объект незавершенного строительства-->
+							<xsl:text>Проектируемое назначение:</xsl:text>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:text>Назначение:</xsl:text>
+						</xsl:otherwise>
+					</xsl:choose>
+				</td>
+				<td style="text-align:left">
+					<xsl:apply-templates select="kp:Assignation_Code_Text"/>
+					<xsl:if test="not(kp:Assignation_Code_Text)">
+						<xsl:call-template name="procherk"/>
+					</xsl:if>
+				</td>
+			</tr>
+			<tr>
+				 <td style="text-align:left">
+					<xsl:text>Наименование:</xsl:text>
+				</td>
+				<td style="text-align:left">
+					<xsl:apply-templates select="kp:Name"/>
+					<xsl:if test="not(kp:Name)">
+						<xsl:call-template name="procherk"/>
+					</xsl:if>
+				</td>
+			</tr>
+			<xsl:if test="$ObjType='002002001000' or $ObjType='002002004000'">
+				<!--здание или сооружение-->
+				<tr>
+					<td style="text-align:left">
+						<xsl:text>Количество этажей, в том числе подземных этажей:</xsl:text>
+					</td>
+					<td style="text-align:left">
+						<xsl:apply-templates select="kp:Floor"/>
+						<xsl:if test="not(kp:Floor)">
+							<xsl:call-template name="procherk"/>
+						</xsl:if>
+					</td>
+				</tr>
+			</xsl:if>
+			<xsl:if test="$ObjType='002002002000'">
+				<!--помещение-->
+				<tr>
+					<td style="text-align:left">
+						<xsl:text>Номер этажа, на котором расположено помещение, машино-место:</xsl:text>
+					</td>
+					<td style="text-align:left">
+						<xsl:apply-templates select="kp:Floor"/>
+						<xsl:if test="not(kp:Floor)">
+							<xsl:call-template name="procherk"/>
+						</xsl:if>
+					</td>
+				</tr>
+			</xsl:if>
+			<xsl:if test="$ObjType='002002002000' and $AssigCode=005001000000">
+				<!--жилое помещение-->
+				<tr>
+					<td style="text-align:left">
+						<xsl:text>Вид жилого помещения:</xsl:text>
+					</td>
+					<td style="text-align:left">
+						<xsl:call-template name="procherk"/>
+					</td>
+				</tr>
+			</xsl:if>
+			<xsl:if test="$ObjType='002002001000' or $ObjType='002002004000'">
+				<!--здание или сооружение-->
+				<tr>
+					<td style="text-align:left">
+						<xsl:text>Год ввода в эксплуатацию:</xsl:text>
+					</td>
+					<td style="text-align:left">
+						<xsl:call-template name="procherk"/>
+					</td>
+				</tr>
+				<tr>
+					<td style="text-align:left">
+						<xsl:text>Год завершения строительства:</xsl:text>
+					</td>
+					<td style="text-align:left">
+						<xsl:call-template name="procherk"/>
+					</td>
+				</tr>
+			</xsl:if>
+			<tr>
+				<td style="text-align:left">
+					<xsl:text>Кадастровая стоимость:</xsl:text>
+				</td>
+				<td style="text-align:left">
+					<xsl:call-template name="procherk"/>
+				</td>
+			</tr>
+			<xsl:if test="$ObjType!='002002000000'">
+					<!--это ПИК или ЕНК-->
+				<tr>
+				<td style="text-align:left">
+					<xsl:text>Кадастровые номера иных объектов недвижимости, в пределах которых расположен объект недвижимости: </xsl:text>
+				</td>
+				<td style="text-align:left">
+					<xsl:call-template name="procherk"/>
+				</td>
+			</tr>
+			</xsl:if>
+			<xsl:if test="$ObjType='002002001000' or $ObjType='002002004000'">
+				<!--здание или сооружение-->
+				<tr>
+					<td style="text-align:left">
+						<xsl:text>Кадастровые номера помещений, машино-мест, расположенных в здании или сооружении:</xsl:text>
+					</td>
+					<td style="text-align:left">
+						<xsl:call-template name="procherk"/>
+					</td>
+				</tr>
+			</xsl:if>
+			<xsl:if test="$ObjType='002002000000'">
+				<!--это ПИК или ЕНК-->
+				<tr>
+					<td style="text-align:left">
+						<xsl:text>Кадастровые номера объектов недвижимости, входящих в состав единого недвижимого комплекса, предприятия как имущественный комплекс:</xsl:text>
+					</td>
+					<td style="text-align:left">
+						<xsl:call-template name="Panel">
+							<xsl:with-param name="Text">
+								<xsl:choose>
+									<xsl:when test="kp:Complex/kp:Explication">
+										<xsl:for-each select="kp:Complex/kp:Explication">
+											<xsl:if test="not(position()=1)">
+												<xsl:text>; </xsl:text>
+											</xsl:if>
+											<xsl:call-template name="Value">
+												<xsl:with-param name="Node" select="."/>
+											</xsl:call-template>
+										</xsl:for-each>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:text>Объекты недвижимого имущества отсутствуют</xsl:text>
+									</xsl:otherwise>
+								</xsl:choose>
+							</xsl:with-param>
+						</xsl:call-template>
+					</td>
+				</tr>
+			</xsl:if>
+			<xsl:if test="$ObjType='002002000000' and $ObjTypeText='Единый недвижимый комплекс'">
+				<!--ЕНК-->
+				<tr>
+					<td style="text-align:left">
+						<xsl:text>Кадастровый номер земельного участка, если входящие в состав единого недвижимого комплекса объекты недвижимости расположены на одном участке:</xsl:text>
+					</td>
+					<td style="text-align:left">
+						<xsl:call-template name="procherk"/>
+					</td>
+				</tr>
+			</xsl:if>
+			<xsl:if test="$ObjType='002002002000' and $AssigCode=005001000000">
+				<!--жилое помещение-->
+				<tr>
+					<td style="text-align:left">
+						<xsl:text>Сведения об отнесении жилого помещения к определенному виду жилых помещений специализированного жилищного фонда, к жилым помещениям наемного дома социального использования или наемного дома коммерческого использования:</xsl:text>
+					</td>
+					<td style="text-align:left">
+						<xsl:call-template name="procherk"/>
+					</td>
+				</tr>
+			</xsl:if>
+			<tr>
+				<td style="text-align:left">
+					<xsl:text>Статус записи об объекте недвижимости: </xsl:text>
+				</td>
+				<td style="text-align:left">
+					<xsl:call-template name="procherk"/>
+				</td>
+			</tr>
+			<tr>
+				<td style="text-align:left">
+					<xsl:text>Особые отметки:</xsl:text>
+				</td>
+				<td style="text-align:left">
+					<xsl:text>Сведения об объекте недвижимости сформированы по данным, ранее внесенным в Единый государственный реестр прав.</xsl:text>
+					<br/>
+					<xsl:if test="$ObjType!='002002000000'">
+						<!--это НЕ ПИК или ЕНК-->
+						<xsl:text>Сведения необходимые для заполнения раздела 3 отсутствуют.</xsl:text>
+					</xsl:if>
+					<xsl:if test="$ObjType='002002000000' and $ObjTypeText='Единый недвижимый комплекс'">
+						<!--это ЕНК-->
+						<xsl:text>Сведения, необходимые для заполнения Раздела 4 "Описание местоположения объекта недвижимости", отсутствуют.</xsl:text>
+					</xsl:if>
+				</td>
+			</tr>
+			<tr>
+				<td style="text-align:left">
+					<xsl:text>Получатель выписки: </xsl:text>
+				</td>
+				<td style="text-align:left">
+					<xsl:value-of select="$FootContent/kp:Recipient"/>
+				</td>
+			</tr>
+				</table>
+		<xsl:call-template name="OKSBottom"/>
+		<xsl:call-template name="Extract">
+			<xsl:with-param name="Extract"/>
+		</xsl:call-template>
+	</xsl:template>
+
 	<xsl:template match="kp:Address">
 		<xsl:if test="not(string(adr:Note))">
 			<xsl:if test="string(adr:PostalCode)">
@@ -2282,7 +2282,7 @@ if (CP && CP.lineTo){
 		</xsl:if>
 		<xsl:value-of select="adr:Note"/>
 	</xsl:template>
-	
+
 	<xsl:template match="kp:ConditionalPartsLinear" mode="coord">
 		<xsl:text>Системы координат: </xsl:text>
 		<xsl:apply-templates select="kp:ConditionalPartLinear" mode="coord"/>
@@ -2291,7 +2291,7 @@ if (CP && CP.lineTo){
 	<xsl:template match="kp:ConditionalPartsLinear" mode="cn">
 		<xsl:apply-templates select="kp:ConditionalPartLinear" mode="cn"/>
 	</xsl:template>
-	
+
 	<xsl:template match="kp:ConditionalPartLinear" mode="coord">
 		<xsl:if test="kp:EntitySpatial">
 			<xsl:variable name="entSys" select="string(kp:EntitySpatial/@EntSys)"/>
@@ -2325,17 +2325,17 @@ if (CP && CP.lineTo){
 		<table class="tbl_container">
 			<tr>
 				<th>
-          <xsl:if test="self::kp:Flat">
-            <xsl:call-template name="Title">
-              <xsl:with-param name="pageNumber" select="5"/>
-            </xsl:call-template>
-          </xsl:if>
-          <xsl:if test="not(self::kp:Flat)">
-            <xsl:call-template name="Title">
-              <xsl:with-param name="pageNumber" select="4"/>
-            </xsl:call-template>
-          </xsl:if>
-        </th>					
+					<xsl:if test="self::kp:Flat">
+						<xsl:call-template name="Title">
+							<xsl:with-param name="pageNumber" select="5"/>
+						</xsl:call-template>
+					</xsl:if>
+					<xsl:if test="not(self::kp:Flat)">
+						<xsl:call-template name="Title">
+							<xsl:with-param name="pageNumber" select="4"/>
+						</xsl:call-template>
+					</xsl:if>
+				</th>
 					<!--<br/>-->
 					<table class="tbl_container">
 						<!--<tr>
@@ -2348,34 +2348,34 @@ if (CP && CP.lineTo){
 						</tr>-->
 						<tr>
 							<th>
-							  <xsl:if test="self::kp:Flat">
+								<xsl:if test="self::kp:Flat">
 									<xsl:call-template name="topSheets">
 										<xsl:with-param name="curRazd" select="5"/>
 										<xsl:with-param name="curSheet" select="$prev_pages_total+$index_cur+1"/>
 										<xsl:with-param name="allSheets" select="$listAll"/>
 									</xsl:call-template>
-							  </xsl:if>
-							  <xsl:if test="not(self::kp:Flat)">
+								</xsl:if>
+								<xsl:if test="not(self::kp:Flat)">
 								<xsl:call-template name="topSheets">
 									<xsl:with-param name="curRazd" select="4"/>
 									<xsl:with-param name="curSheet" select="$prev_pages_total+$index_cur+1"/>
 									<xsl:with-param name="allSheets" select="$listAll"/>
 								</xsl:call-template>
-							  </xsl:if>
+								</xsl:if>
 							</th>
 						</tr>
 						<tr>
 							<th>
 								<!--<br/>-->
 								<xsl:if test="self::kp:Flat">
-								  <xsl:call-template name="HeadNumbers">
+									<xsl:call-template name="HeadNumbers">
 									<xsl:with-param name="pageNumber" select="5"/>
-								  </xsl:call-template>
+									</xsl:call-template>
 								</xsl:if>
 								<xsl:if test="not(self::kp:Flat)">
-								  <xsl:call-template name="HeadNumbers">
+									<xsl:call-template name="HeadNumbers">
 									<xsl:with-param name="pageNumber" select="4"/>
-								  </xsl:call-template>
+									</xsl:call-template>
 								</xsl:if>
 							</th>
 						</tr>
@@ -2417,7 +2417,7 @@ if (CP && CP.lineTo){
 												</xsl:attribute>
 												<xsl:attribute name="align">center</xsl:attribute>
 												<xsl:if test="name($currentPlan)='EntitySpatial'">
-													<canvas id="canvas" width="700" height="600"  class="m_canvas" style="cursor: pointer;"/>
+													<canvas id="canvas" width="700" height="600" class="m_canvas" style="cursor: pointer;"/>
 												</xsl:if>
 												<xsl:if test="name($currentPlan)='Plan'">
 													<script type="text/javascript">
@@ -2490,17 +2490,17 @@ if (CP && CP.lineTo){
 		<table class="tbl_container">
 			<tr>
 				<th>
-          <xsl:if test="self::kp:Flat">
-            <xsl:call-template name="Title">
-              <xsl:with-param name="pageNumber" select="5"/>
-            </xsl:call-template>
-          </xsl:if>
-          <xsl:if test="not(self::kp:Flat)">
-            <xsl:call-template name="Title">
-              <xsl:with-param name="pageNumber" select="4"/>
-            </xsl:call-template>
-          </xsl:if>
-          </th> 
+					<xsl:if test="self::kp:Flat">
+						<xsl:call-template name="Title">
+							<xsl:with-param name="pageNumber" select="5"/>
+						</xsl:call-template>
+					</xsl:if>
+					<xsl:if test="not(self::kp:Flat)">
+						<xsl:call-template name="Title">
+							<xsl:with-param name="pageNumber" select="4"/>
+						</xsl:call-template>
+					</xsl:if>
+					</th>
 					<!--<br/>-->
 					<table class="tbl_container">
 						<!--<tr>
@@ -2523,16 +2523,16 @@ if (CP && CP.lineTo){
 						<tr>
 							<th>
 								<!--<br/>-->
-                <xsl:if test="self::kp:Flat">
-                  <xsl:call-template name="HeadNumbers">
-                    <xsl:with-param name="pageNumber" select="5"/>
-                  </xsl:call-template>
-                </xsl:if>
-                <xsl:if test="not(self::kp:Flat)">
-                  <xsl:call-template name="HeadNumbers">
-                    <xsl:with-param name="pageNumber" select="4"/>
-                  </xsl:call-template>
-                </xsl:if>								
+								<xsl:if test="self::kp:Flat">
+									<xsl:call-template name="HeadNumbers">
+										<xsl:with-param name="pageNumber" select="5"/>
+									</xsl:call-template>
+								</xsl:if>
+								<xsl:if test="not(self::kp:Flat)">
+									<xsl:call-template name="HeadNumbers">
+										<xsl:with-param name="pageNumber" select="4"/>
+									</xsl:call-template>
+								</xsl:if>
 							</th>
 						</tr>
 						<tr>
@@ -2600,7 +2600,7 @@ if (CP && CP.lineTo){
 													<xsl:apply-templates select="$currentPlan/ancestor::kp:ConditionalPartLinear[descendant::kp:EntitySpatial]" mode="poly">
 														<xsl:with-param name="count" select="count($currentPlan/ancestor::kp:ConditionalPartLinear[descendant::kp:EntitySpatial])"/>
 													</xsl:apply-templates>
-													
+
 													<![CDATA[
 													for (var i = CoordsNew.length - 1; i >= 0; i--) {
 														for (var z = 0; z < CoordsNew[i].length; z++) {
@@ -2625,22 +2625,22 @@ if (CP && CP.lineTo){
 													var id = '<xsl:value-of select="$canvas"/>';
 													canvas = document.getElementById(id);
 													if (!canvas.getContext) return;
-													
+
 													context = canvas.getContext("2d");
-													
+
 													// Отрисовка по таймеру
 													setInterval(drawPoly<xsl:value-of select="$index_cur"/>, 100, canvas, context, CoordsNew, minX, maxX, minY, maxY);
-												
+
 													// Обработчик колеса мыши
 													canvas.onmousewheel = function (event) {
 														var mousex = event.clientX - canvas.offsetLeft;
 														var mousey = event.clientY - canvas.offsetTop;
 														var wheel = event.wheelDelta / 120;
-												
+
 														var zoom = Math.pow(1 + Math.abs(wheel) / 2, wheel > 0 ? 1 : -1);
-												
+
 														zoomTo(context, mousex, mousey, zoom);
-												
+
 														if (event.preventDefault) {
 															event.preventDefault();
 														}
@@ -2648,29 +2648,29 @@ if (CP && CP.lineTo){
 													var scale = 1;
 													$(canvas).mousedown(function mouseMove(event)
 													{
-														// Когда отпускаем мышку - перестаем 
+														// Когда отпускаем мышку - перестаем
 														$(document).bind('mouseup.cropper', function () {
 															$(document).unbind('mousemove.cropper');
 															$(document).unbind('mouseup.cropper');
 														});
-													
+
 														//Сохраняем координаты нажатия
 														var oldX = event.clientX, oldY = event.clientY;
-													
+
 														// Перемещаем все объекты по карте вместе с мышью
 														$(document).bind('mousemove.cropper', function (event) {
 															var x = event.clientX, y = event.clientY, newX = (oldX - x) * -1, newY = (oldY - y) * -1;
-													
+
 															originx = newX / scale;
 															originy = newY / scale;
-													
+
 															// Перемещаем объект
 															context.clearRect(0, 0, context.canvas.width, context.canvas.height);
 															context.translate(newX / scale, newY / scale);
-													
+
 															// Перерисовываем картинку
 															drawPoly<xsl:value-of select="$index_cur"/>(canvas, context, CoordsNew, minX, maxX, minY, maxY);
-													
+
 															// Обновляем координаты
 															oldX = x;
 															oldY = y;
@@ -2678,46 +2678,46 @@ if (CP && CP.lineTo){
 														});
 														return false;
 													});
-													
+
 													drawPoly<xsl:value-of select="$index_cur"/>(canvas, context, CoordsNew, minX, maxX, minY, maxY);
 												};
 												load<xsl:value-of select="$index_cur"/>();
 												function drawPoly<xsl:value-of select="$index_cur"/>(canvas, context, CoordsNew, minX, maxX, minY, maxY){
 												<![CDATA[
 													context.fillStyle = "white";
-												
+
 													var width = 700;
 													var height = 600;
-												
+
 													context.save();
 													context.setTransform(1, 0, 0, 1, 0, 0);
 													context.clearRect(0, 0, canvas.width, canvas.height);
 													context.restore();
-												
+
 													var cX = maxY - minY;
 													var cY = maxX - minX;
-												
+
 													// Коэффициент масштабирования
 													var koef;
 													var koefX = cX / width;
 													var koefY = cY / height;
 													if (koefX < koefY) koef = koefY; else koef = koefX;
-												
+
 													// Смещение координат для центрирования
 													var offX = 0;
 													var offY = 0;
 													//if (cX < height) offY = (height - cX) / 2; else offX = (width - cY) / 2;
-												
+
 													for (var i = CoordsNew.length - 1; i >= 0; i--) {
 														var polygon = [];
 														context.save();
 														context.beginPath();
 														context.lineWidth = 2;
-												
+
 														for (var z = 0; z < CoordsNew[i].length; z++) {
 															x1 = ((maxX - CoordsNew[i][z][1]) / koef) + offX;
 															y1 = ((CoordsNew[i][z][2] - minY) / koef) + offY;
-												
+
 															if (CoordsNew[i][z].length > 4) {
 																x2p = x1;
 																y2p = y1;
@@ -2725,14 +2725,14 @@ if (CP && CP.lineTo){
 																for (var j = 1; j < CoordsNew[i][z].length / 2; j++) {
 																	x2 = ((maxX - CoordsNew[i][z][(j * 2) - 1]) / koef) + offX;
 																	y2 = ((CoordsNew[i][z][j * 2] - minY) / koef) + offY;
-												
+
 																	if (CoordsNew[i][0][0].charAt(0) == 'R')
 																		context.dashedLine(y2p, x2p, y2, x2, [2, 5]);
 																	else if (CoordsNew[i][0][0].charAt(0) == 'P')
 																		context.dashedLine(y2p, x2p, y2, x2, [8, 5]);
 																	else
 																		context.lineTo(y2, x2);
-												
+
 																	polygon[j - 1] = new Point(y2, x2);
 																	x2p = x2;
 																	y2p = y2;
@@ -2743,18 +2743,18 @@ if (CP && CP.lineTo){
 																context.beginPath();
 																var rx = ((maxX - (CoordsNew[i][z][1] + (CoordsNew[i][z][3] * Math.cos(2 * Math.PI)))) / koef) + offX;
 																var ry = (((CoordsNew[i][z][2] + (CoordsNew[i][z][3] * Math.sin(2 * Math.PI))) - minY) / koef) + offY;
-																
+
 																if (CoordsNew[i][0][0].charAt(0) == 'R'){
 																	context.fillStyle = "Black";
 																	var dotsPerCircle=60;
 																	var interval=(Math.PI*2)/dotsPerCircle;
-																	
+
 																	for(var d = 0; d < dotsPerCircle; d++){
 																		desiredRadianAngleOnCircle = interval*d;
-																		
+
 																		var x = y1 + (x1 - rx) * Math.cos(desiredRadianAngleOnCircle);
 																		var y = x1 + (x1 - rx) * Math.sin(desiredRadianAngleOnCircle);
-																		
+
 																		context.beginPath();
 																		context.arc(x, y, 1, 0, 2 * Math.PI);
 																		context.closePath();
@@ -2763,9 +2763,9 @@ if (CP && CP.lineTo){
 																}
 																else if (CoordsNew[i][0][0].charAt(0) == 'P'){
 																	context.fillStyle = "Black";
-																	
+
 																	var pointArray= calcPointsCirc(y1, x1, x1 - rx, 1);
-																	
+
 																	for(p = 0; p < pointArray.length; p++){
 																		context.moveTo(pointArray[p].x, pointArray[p].y);
 																		context.lineTo(pointArray[p].ex, pointArray[p].ey);
@@ -2774,15 +2774,15 @@ if (CP && CP.lineTo){
 																}
 																else
 																	context.arc(y1, x1, x1 - rx, 0, 2 * Math.PI);
-																	
+
 																polygon[polygon.length] = new Point(y1, x1);
 																context.restore();
 															}
 														}
-												
+
 														context.stroke();
 														context.restore();
-												
+
 														var center = (new Contour(polygon)).centroid();
 														if (isNaN(center.x) && isNaN(center.y)){
 															if (polygon.length==1){
@@ -2794,7 +2794,7 @@ if (CP && CP.lineTo){
 																center.y = polygon[1].y;
 															}
 														}
-														
+
 														if (CoordsNew[i][0][0].charAt(0) == 'Z')
 															context.fillStyle = "Black";
 														else
@@ -2840,7 +2840,7 @@ if (CP && CP.lineTo){
 			</xsl:call-template>
 		</xsl:if>
 	</xsl:template>
-	
+
 	<xsl:template name="Form2p">
 		<xsl:param name="index_cur"/>
 		<xsl:param name="prev_pages_total"/>
@@ -2849,30 +2849,30 @@ if (CP && CP.lineTo){
 		<xsl:variable name="currentPlan" select="($Plans)[$index_cur+1]"/>
 		<!--<br/>
 		<br/>-->
-    <xsl:if test="self::kp:Flat">
-      <xsl:call-template name="Title">
-        <xsl:with-param name="pageNumber" select="5"/>
-      </xsl:call-template>
-    </xsl:if>
-    <xsl:if test="not(self::kp:Flat)">
-      <xsl:call-template name="Title">
-        <xsl:with-param name="pageNumber" select="4"/>
-      </xsl:call-template>
-    </xsl:if>
-    <xsl:if test="self::kp:Flat">
+		<xsl:if test="self::kp:Flat">
+			<xsl:call-template name="Title">
+				<xsl:with-param name="pageNumber" select="5"/>
+			</xsl:call-template>
+		</xsl:if>
+		<xsl:if test="not(self::kp:Flat)">
+			<xsl:call-template name="Title">
+				<xsl:with-param name="pageNumber" select="4"/>
+			</xsl:call-template>
+		</xsl:if>
+		<xsl:if test="self::kp:Flat">
 		<xsl:call-template name="topSheets">
 			<xsl:with-param name="curRazd" select="5"/>
 			<xsl:with-param name="curSheet" select="$listAll"/>
 			<xsl:with-param name="allSheets" select="$listAll"/>
 		</xsl:call-template>
-    </xsl:if>
-    <xsl:if test="not(self::kp:Flat)">
+		</xsl:if>
+		<xsl:if test="not(self::kp:Flat)">
 		<xsl:call-template name="topSheets">
 			<xsl:with-param name="curRazd" select="4"/>
 			<xsl:with-param name="curSheet" select="$listAll"/>
 			<xsl:with-param name="allSheets" select="$listAll"/>
 		</xsl:call-template>
-    </xsl:if>
+		</xsl:if>
 					<!--<br/>-->
 					<table class="tbl_container">
 						<!--<tr>
@@ -2885,16 +2885,16 @@ if (CP && CP.lineTo){
 						</tr>-->
 					<!--<tr>
 							<th>
-                <xsl:if test="self::kp:Flat">
+								<xsl:if test="self::kp:Flat">
 								<xsl:call-template name="HeadNumbers">
 									<xsl:with-param name="pageNumber" select="5"/>
 								</xsl:call-template>
-                </xsl:if>
-                <xsl:if test="not(self::kp:Flat)">
-                  <xsl:call-template name="HeadNumbers">
-                    <xsl:with-param name="pageNumber" select="4"/>
-                  </xsl:call-template>      
-                </xsl:if>
+								</xsl:if>
+								<xsl:if test="not(self::kp:Flat)">
+									<xsl:call-template name="HeadNumbers">
+										<xsl:with-param name="pageNumber" select="4"/>
+									</xsl:call-template>
+								</xsl:if>
 							</th>
 						</tr>-->
 						<tr>
@@ -2969,7 +2969,7 @@ if (CP && CP.lineTo){
 					</table>
 					<xsl:call-template name="OKSBottom"/>
 	</xsl:template>
-		
+
 	<xsl:template name="Form3">
 		<xsl:param name="listAll"/>
 		<xsl:call-template name="newPage"/>
@@ -2978,16 +2978,16 @@ if (CP && CP.lineTo){
 		<table class="tbl_container">
 			<tr>
 				<th>
-          <xsl:if test="self::kp:Flat">
-            <xsl:call-template name="Title">
-              <xsl:with-param name="pageNumber" select="5"/>
-            </xsl:call-template>
-          </xsl:if>
-          <xsl:if test="not(self::kp:Flat)">
-            <xsl:call-template name="Title">
-              <xsl:with-param name="pageNumber" select="4"/>
-            </xsl:call-template>
-          </xsl:if>
+					<xsl:if test="self::kp:Flat">
+						<xsl:call-template name="Title">
+							<xsl:with-param name="pageNumber" select="5"/>
+						</xsl:call-template>
+					</xsl:if>
+					<xsl:if test="not(self::kp:Flat)">
+						<xsl:call-template name="Title">
+							<xsl:with-param name="pageNumber" select="4"/>
+						</xsl:call-template>
+					</xsl:if>
 					<!--<br/>-->
 					<table class="tbl_container">
 						<!--<tr>
@@ -3075,7 +3075,7 @@ if (CP && CP.lineTo){
 			</tr>
 		</table>
 	</xsl:template>
-	
+
 	<xsl:template name="Form3_Row">
 		<xsl:param name="Row"/>
 		<xsl:param name="Dict"/>
@@ -3218,35 +3218,35 @@ if (CP && CP.lineTo){
 	</xsl:template>
 
 	<xsl:template name="Title">
-		<xsl:param name="pageNumber"/>    
+		<xsl:param name="pageNumber"/>
 		<!--<div class="title1">-->
-    <div class="title1">
+		<div class="title1">
 			<xsl:text>Раздел </xsl:text>
 			<xsl:value-of select="$pageNumber"/>
 		</div>
 		<!--<br/>-->
 		<div class="title2">
 		<xsl:text>Выписка из Единого государственного реестра недвижимости об основных характеристиках и зарегистрированных правах на объект недвижимости</xsl:text>
-      <br/>
-        <xsl:if test="$pageNumber='1'">
-          <b><xsl:text>Сведения об основных характеристиках объекта недвижимости</xsl:text></b>
-        </xsl:if>
-        <xsl:if test="$pageNumber='2'">
-          <b><xsl:text>Сведения о зарегистрированных правах</xsl:text></b>
-        </xsl:if>
-        <xsl:if test="$pageNumber='4'">
-          <b><xsl:text>Описание местоположения объекта недвижимости</xsl:text></b>
-        </xsl:if>
-        <xsl:if test="$pageNumber='5'">
-          <b><xsl:text>План расположения помещения, машино-места на этаже (плане этажа)</xsl:text></b>
-        </xsl:if>
-      <!--<br/>
-      <br/>-->
-    </div>
-        <xsl:if test="$pageNumber='1'">
-          <br/>
-          		<xsl:value-of select="$HeadContent/kp:Content"/>
-        </xsl:if>
+			<br/>
+				<xsl:if test="$pageNumber='1'">
+					<b><xsl:text>Сведения об основных характеристиках объекта недвижимости</xsl:text></b>
+				</xsl:if>
+				<xsl:if test="$pageNumber='2'">
+					<b><xsl:text>Сведения о зарегистрированных правах</xsl:text></b>
+				</xsl:if>
+				<xsl:if test="$pageNumber='4'">
+					<b><xsl:text>Описание местоположения объекта недвижимости</xsl:text></b>
+				</xsl:if>
+				<xsl:if test="$pageNumber='5'">
+					<b><xsl:text>План расположения помещения, машино-места на этаже (плане этажа)</xsl:text></b>
+				</xsl:if>
+			<!--<br/>
+			<br/>-->
+		</div>
+				<xsl:if test="$pageNumber='1'">
+					<br/>
+							<xsl:value-of select="$HeadContent/kp:Content"/>
+				</xsl:if>
 	</xsl:template>
 
 	<xsl:template name="topKind">
@@ -3288,7 +3288,7 @@ if (CP && CP.lineTo){
 	<xsl:param name="SheetsinRazd"/>
 	<xsl:param name="curRazd"/>
 	<xsl:param name="allRazd"/>
-   
+
 	<table class="t" border="1" cellpadding="2" cellspacing="0" width="100%">
 		<tr>
 			<td colspan="4">
@@ -3296,7 +3296,7 @@ if (CP && CP.lineTo){
 			</td>
 		</tr>
 		<tr>
-			<th  colspan="4" style="text-align:center" valign="top">
+			<th colspan="4" style="text-align:center" valign="top">
 				<font style="FONT-SIZE: 60%;">(вид объекта недвижимости)</font>
 			</th>
 		</tr>
@@ -3318,25 +3318,25 @@ if (CP && CP.lineTo){
 				<xsl:text>Всего листов раздела </xsl:text>
 				<u><b>&nbsp;<xsl:value-of select="$curRazd"/>&nbsp;</b></u>
 				<b><xsl:text>: </xsl:text></b>
-			  <!--<u>
+				<!--<u>
 				<b>
-				  &nbsp;<xsl:value-of select="$SheetsinRazd"/>&nbsp;
+					&nbsp;<xsl:value-of select="$SheetsinRazd"/>&nbsp;
 				</b>
-			  </u>-->
+				</u>-->
 				___
 			</td>
 			<td width="20%">
-				  <xsl:text>Всего разделов:  </xsl:text>
+					<xsl:text>Всего разделов:  </xsl:text>
 					<!--<u><b>&nbsp;<xsl:value-of select="$allRazd"/>&nbsp;</b></u>-->
 					___
 			</td>
 			<td width="25%">
 				<xsl:text>Всего листов выписки:  </xsl:text>
-				  <!--<u>
+					<!--<u>
 					<b>
-					  &nbsp;<xsl:value-of select="$allSheets"/>&nbsp;
+						&nbsp;<xsl:value-of select="$allSheets"/>&nbsp;
 					</b>
-				  </u>-->
+					</u>-->
 					___
 			</td>
 		</tr>
@@ -3353,25 +3353,25 @@ if (CP && CP.lineTo){
 				</b>
 			</td>
 		</tr>
-    <!--</table>
+		<!--</table>
 	<table class="t" border="1" cellpadding="2" cellspacing="0" width="100%">-->
 		<tr>
 			<td colspan="2">
 				<xsl:text>Кадастровый номер: </xsl:text>
 			</td>
 			<td colspan="2">
-				<b><xsl:value-of select="$cadNum"/></b>       
+				<b><xsl:value-of select="$cadNum"/></b>
 			</td>
-    </tr>
+		</tr>
 	</table>
 	<xsl:if test="$curRazd != 4">
 		<br/>
 	</xsl:if>
 </xsl:template>
-  
+
 	<xsl:template name="HeadNumbers">
 		<xsl:param name="pageNumber"/>
-		<table class="tbl_section_topsheet">			
+		<table class="tbl_section_topsheet">
 			<xsl:if test="$pageNumber=1">
 				<tr>
 					<th class="left" width="55%">
@@ -3389,17 +3389,17 @@ if (CP && CP.lineTo){
 						</xsl:if>
 					</th>
 				</tr>
-        <tr>
-          <th class="left" width="50%">
-            <xsl:text>Дата присвоения кадастрового номера:</xsl:text>
-          </th>
-          <th class="left" width="50%">
-            <xsl:apply-templates select="@DateCreated" mode="digitsXmlWithoutYear"/>
-            <xsl:if test="not(@DateCreated)">
-              <xsl:text>данные отсутствуют</xsl:text>
-            </xsl:if>
-          </th>
-        </tr>
+				<tr>
+					<th class="left" width="50%">
+						<xsl:text>Дата присвоения кадастрового номера:</xsl:text>
+					</th>
+					<th class="left" width="50%">
+						<xsl:apply-templates select="@DateCreated" mode="digitsXmlWithoutYear"/>
+						<xsl:if test="not(@DateCreated)">
+							<xsl:text>данные отсутствуют</xsl:text>
+						</xsl:if>
+					</th>
+				</tr>
 				<tr>
 					<th class="left" width="50%">
 						<xsl:text>Ранее присвоенный государственный учетный номер: </xsl:text>
@@ -3419,7 +3419,7 @@ if (CP && CP.lineTo){
 							<xsl:text>данные отсутствуют</xsl:text>
 						</xsl:if>
 					</th>
-				</tr>				
+				</tr>
 			</xsl:if>
 		</table>
 	</xsl:template>
@@ -3447,41 +3447,41 @@ if (CP && CP.lineTo){
 		</table>
 	</xsl:template>
 
-  <xsl:template name="OKSBottom">
-    <br/>
-    <table border="1" width="100%" cellpadding="0" cellspacing="0">
-      <tbody>
-        <tr>
-          <th width="40%" style="border-bottom: 1px solid black;" align="center">
-            <xsl:value-of select="$Sender/@Appointment"/>
-          </th>
-          <!--<th width="10%"/>-->
-          <th width="25%" style="border-bottom: 1px solid black;"/>
-          <!--<th width="5%"/>-->
-          <th width="30%" style="border-bottom: 1px solid black;" align="center">
-            <!--<xsl:value-of select="$Sender/@FIO"/>-->
-            <xsl:value-of select="$DeclarAttribute/@Registrator"/>
-          </th>
-        </tr>
-        <tr>
-          <th style="text-align:center" valign="top">
-            <font style="FONT-SIZE: 60%;">(полное наименование должности)</font>
-          </th>
-          <!--<th valign="top" align="center">М.П.</th>-->
-          <th valign="top" style="text-align:center">
-            <font style="FONT-SIZE: 60%;">(подпись)</font>
-          </th>
-          <th style="text-align:center" valign="top">
-            <font style="FONT-SIZE: 60%;">(инициалы, фамилия)</font>
-          </th>
-        </tr>
-      </tbody>
-    </table>
-    <!--<br/>-->
-    <center>
-      <xsl:text>М.П.</xsl:text>
-    </center>
-  </xsl:template>
+	<xsl:template name="OKSBottom">
+		<br/>
+		<table border="1" width="100%" cellpadding="0" cellspacing="0">
+			<tbody>
+				<tr>
+					<th width="40%" style="border-bottom: 1px solid black;" align="center">
+						<xsl:value-of select="$Sender/@Appointment"/>
+					</th>
+					<!--<th width="10%"/>-->
+					<th width="25%" style="border-bottom: 1px solid black;"/>
+					<!--<th width="5%"/>-->
+					<th width="30%" style="border-bottom: 1px solid black;" align="center">
+						<!--<xsl:value-of select="$Sender/@FIO"/>-->
+						<xsl:value-of select="$DeclarAttribute/@Registrator"/>
+					</th>
+				</tr>
+				<tr>
+					<th style="text-align:center" valign="top">
+						<font style="FONT-SIZE: 60%;">(полное наименование должности)</font>
+					</th>
+					<!--<th valign="top" align="center">М.П.</th>-->
+					<th valign="top" style="text-align:center">
+						<font style="FONT-SIZE: 60%;">(подпись)</font>
+					</th>
+					<th style="text-align:center" valign="top">
+						<font style="FONT-SIZE: 60%;">(инициалы, фамилия)</font>
+					</th>
+				</tr>
+			</tbody>
+		</table>
+		<!--<br/>-->
+		<center>
+			<xsl:text>М.П.</xsl:text>
+		</center>
+	</xsl:template>
 	<xsl:template name="Bottom">
 		<table class="tbl_container">
 			<tr>
@@ -3501,19 +3501,19 @@ if (CP && CP.lineTo){
 		<table class="tbl_section_topsheet">
 			<tr>
 				<th>
-					<xsl:value-of select="$Sender/@Appointmen"/>					
+					<xsl:value-of select="$Sender/@Appointmen"/>
 				</th>
 				<th/>
 				<th>
-          <!--<xsl:value-of select="$Sender/@FIO"/>-->
-          <xsl:value-of select="$DeclarAttribute/@Registrator"/>
-        </th>
-			</tr>			
+					<!--<xsl:value-of select="$Sender/@FIO"/>-->
+					<xsl:value-of select="$DeclarAttribute/@Registrator"/>
+				</th>
+			</tr>
 			<tr>
 				<th>(полное наименование должности)</th>
 				<th>(подпись)</th>
 				<th>(инициалы, фамилия)</th>
-			</tr>			
+			</tr>
 		</table>
 	</xsl:template>
 
@@ -3566,16 +3566,16 @@ if (CP && CP.lineTo){
 			<xsl:value-of select="substring(., 1,4)"/> г.
 		</xsl:if>
 	</xsl:template>
-	
+
 	<xsl:template name="smallCase">
 		<xsl:param name="text"/>
 		<xsl:value-of select="translate($text, $uppercase, $smallcase)"/>
-	</xsl:template>	
+	</xsl:template>
 
 	<xsl:template name="upperCase">
 		<xsl:param name="text"/>
 		<xsl:value-of select="translate($text, $smallcase, $uppercase)"/>
-	</xsl:template>	
+	</xsl:template>
 
 	<xsl:template match="kp:EntitySpatial">
 		<xsl:param name="count"/>
@@ -3646,7 +3646,7 @@ if (CP && CP.lineTo){
 		<xsl:text>var maxX</xsl:text><xsl:value-of select="$itemEntity"/><xsl:text> = </xsl:text><xsl:value-of select="$maxX"/><xsl:text>;</xsl:text>
 		<xsl:text>var maxY</xsl:text><xsl:value-of select="$itemEntity"/><xsl:text> = </xsl:text><xsl:value-of select="$maxY"/><xsl:text>;</xsl:text>
 	</xsl:template>
-	
+
 	<xsl:template match="spa:SpatialElement">
 		<xsl:param name="count"/>
 		<xsl:param name="itemEntity"/>
@@ -3662,7 +3662,7 @@ if (CP && CP.lineTo){
 			</xsl:call-template>
 		</xsl:for-each>
 	</xsl:template>
-	
+
 	<xsl:template name="Ordinate">
 		<xsl:param name="itemEntity"/>
 		<xsl:param name="itemElement"/>
@@ -3683,7 +3683,7 @@ if (CP && CP.lineTo){
 			<xsl:with-param name="count" select="count(descendant::kp:EntitySpatial)"/>
 		</xsl:apply-templates>
 	</xsl:template>
-	
+
 	<xsl:template match="kp:EntitySpatial" mode="poly">
 		<xsl:param name="count"/>
 		<xsl:variable name="itemEntity" select="position() - 1"/>
@@ -3717,7 +3717,7 @@ if (CP && CP.lineTo){
 			<xsl:with-param name="count" select="count(descendant::spa:SpatialElement)"/>
 		</xsl:apply-templates>
 	</xsl:template>
-		
+
 	<xsl:template match="spa:SpatialElement" mode="poly">
 		<xsl:param name="count"/>
 		<xsl:param name="itemEntity"/>
@@ -3734,59 +3734,59 @@ if (CP && CP.lineTo){
 		</xsl:for-each>
 	</xsl:template>
 
-  <xsl:template name="Extract">
-    <xsl:param name="Extract"/>
-    <xsl:call-template name="newPage"/>
+	<xsl:template name="Extract">
+		<xsl:param name="Extract"/>
+		<xsl:call-template name="newPage"/>
 
-      <xsl:call-template name="Title">
-        <xsl:with-param name="pageNumber" select="2"/>
-      </xsl:call-template>
-    
-    <!--<br/>-->
-    <xsl:call-template name="topSheets">
-      <xsl:with-param name="curSheet" select="1"/>
-      <xsl:with-param name="allSheets" select="__"/>
-      <xsl:with-param name="curRazd" select="2"/>
-    </xsl:call-template>
-    <table class="t" border="1" cellpadding="2" cellspacing="0" width="100%">
-      <xsl:call-template name="Rights">
-        <xsl:with-param name="Rights" select="$SExtract/kp:ExtractObject/kp:ObjectRight"/>
-      </xsl:call-template>
-      <tr>
-        <td>5.</td>
-        <td colspan="2">
-          <xsl:call-template name="Panel">
-            <xsl:with-param name="Text">
-              <xsl:text>Сведения о наличии решения об изъятии объекта недвижимости для государственных и муниципальных нужд:</xsl:text>
-            </xsl:with-param>
-          </xsl:call-template>
-        </td>
-        <td colspan="2">
-          <xsl:for-each select="$SExtract/kp:ExtractObject">
-            <xsl:value-of select="kp:RightSteal"/>
-          </xsl:for-each>
-        </td>
-      </tr>
-      <tr>
-        <td>6.</td>
-        <td colspan="2">
-          <xsl:call-template name="Panel">
-            <xsl:with-param name="Text">
-              <xsl:text>Сведения об осуществлении государственной регистрации прав без необходимого в силу закона согласия третьего лица, органа:</xsl:text>
-            </xsl:with-param>
-          </xsl:call-template>
-        </td>
-        <td colspan="2">
-          <xsl:for-each select="$SExtract/kp:ExtractObject">
-            <xsl:value-of select="kp:WithoutThirdParty"/>
-          </xsl:for-each>
-        </td>
-      </tr>
-    </table>
-    <xsl:call-template name="OKSBottom"/>
-    <!--<br/>
-    <br/>-->
-  </xsl:template>
+			<xsl:call-template name="Title">
+				<xsl:with-param name="pageNumber" select="2"/>
+			</xsl:call-template>
+
+		<!--<br/>-->
+		<xsl:call-template name="topSheets">
+			<xsl:with-param name="curSheet" select="1"/>
+			<xsl:with-param name="allSheets" select="__"/>
+			<xsl:with-param name="curRazd" select="2"/>
+		</xsl:call-template>
+		<table class="t" border="1" cellpadding="2" cellspacing="0" width="100%">
+			<xsl:call-template name="Rights">
+				<xsl:with-param name="Rights" select="$SExtract/kp:ExtractObject/kp:ObjectRight"/>
+			</xsl:call-template>
+			<tr>
+				<td>5.</td>
+				<td colspan="2">
+					<xsl:call-template name="Panel">
+						<xsl:with-param name="Text">
+							<xsl:text>Сведения о наличии решения об изъятии объекта недвижимости для государственных и муниципальных нужд:</xsl:text>
+						</xsl:with-param>
+					</xsl:call-template>
+				</td>
+				<td colspan="2">
+					<xsl:for-each select="$SExtract/kp:ExtractObject">
+						<xsl:value-of select="kp:RightSteal"/>
+					</xsl:for-each>
+				</td>
+			</tr>
+			<tr>
+				<td>6.</td>
+				<td colspan="2">
+					<xsl:call-template name="Panel">
+						<xsl:with-param name="Text">
+							<xsl:text>Сведения об осуществлении государственной регистрации прав без необходимого в силу закона согласия третьего лица, органа:</xsl:text>
+						</xsl:with-param>
+					</xsl:call-template>
+				</td>
+				<td colspan="2">
+					<xsl:for-each select="$SExtract/kp:ExtractObject">
+						<xsl:value-of select="kp:WithoutThirdParty"/>
+					</xsl:for-each>
+				</td>
+			</tr>
+		</table>
+		<xsl:call-template name="OKSBottom"/>
+		<!--<br/>
+		<br/>-->
+	</xsl:template>
  <xsl:template name="Rights">
 	<xsl:param name="Rights"/>
 	<xsl:for-each select="$Rights/kp:Right">
@@ -3807,192 +3807,192 @@ if (CP && CP.lineTo){
 			<xsl:value-of disable-output-escaping="yes" select="concat('&lt;', 'table class=t border=1 cellpadding=2 cellspacing=0 width=100%', '&gt;')"/>
 		</xsl:if>
 
-      <tr>
-        <td width="1%">1.</td>
-        <td width="40%" colspan="2">
-          <xsl:call-template name="Panel">
-            <xsl:with-param name="Text">
-              <xsl:text>Правообладатель (правообладатели):</xsl:text>
-            </xsl:with-param>
-          </xsl:call-template>
-        </td>
-        <td width="1%">
-          <xsl:text>1.</xsl:text>
-          <xsl:value-of select="position()"/>
-          <xsl:text>.</xsl:text>
-        </td>
-        <td>
-          <xsl:call-template name="Panel">
-            <xsl:with-param name="Text">
-              <xsl:choose>
-                <xsl:when test="kp:Owner">
-                  <xsl:for-each select="kp:Owner">
-                    <xsl:if test="not(position()=1)">
-                      <xsl:text>;</xsl:text>
-                      <br />
-                    </xsl:if>
-                    <xsl:choose>
-                      <xsl:when test="kp:Person">
-                        <xsl:call-template name="Value">
-                          <xsl:with-param name="Node" select="kp:Person/kp:Content"/>
-                        </xsl:call-template>
-                        <xsl:choose>
-                          <xsl:when test="Person/MdfDate">
-                            <br />
-                            <i style='mso-bidi-font-style:normal'>
-                              <xsl:text>Дата модификации:</xsl:text>
-                              <xsl:call-template name="Value">
-                                <xsl:with-param name="Node" select="Person/MdfDate"/>
-                              </xsl:call-template>
-                            </i>
-                          </xsl:when>
-                        </xsl:choose>
-                      </xsl:when>
-                      <xsl:when test="kp:Organization">
-                        <xsl:call-template name="Value">
-                          <xsl:with-param name="Node" select="kp:Organization/kp:Content"/>
-                        </xsl:call-template>
-                        <xsl:choose>
-                          <xsl:when test="Organization/MdfDate">
-                            <br />
-                            <i style='mso-bidi-font-style:normal'>
-                              <xsl:text>Дата модификации:</xsl:text>
-                              <xsl:call-template name="Value">
-                                <xsl:with-param name="Node" select="Organization/MdfDate"/>
-                              </xsl:call-template>
-                            </i>
-                          </xsl:when>
-                        </xsl:choose>
-                      </xsl:when>
-                      <xsl:when test="kp:Governance">
-                        <xsl:call-template name="Value">
-                          <xsl:with-param name="Node" select="kp:Governance/kp:Content"/>
-                        </xsl:call-template>
-                      </xsl:when>
-                    </xsl:choose>
-                  </xsl:for-each>
-                </xsl:when>
-                <xsl:otherwise>
-                  <xsl:call-template name="Value">
-                    <xsl:with-param name="Node" select="kp:NoOwner"/>
-                  </xsl:call-template>
-                </xsl:otherwise>
-              </xsl:choose>
-            </xsl:with-param>
-          </xsl:call-template>
-        </td>
-      </tr>
-      <xsl:choose>      
-      <xsl:when test="kp:NoRegistration and kp:Owner">
-        <!--<br></br>-->
-      </xsl:when>  
-      <xsl:otherwise>
-      <tr>
-        <td>2.</td>
-        <td colspan="2">
-          <xsl:call-template name="Panel">
-            <xsl:with-param name="Text">
-              <xsl:text>Вид, номер и дата государственной регистрации права:</xsl:text>
-            </xsl:with-param>
-          </xsl:call-template>
-        </td>
-        <td>
-          <xsl:text>2.</xsl:text>
-          <xsl:value-of select="position()"/>
-          <xsl:text>.</xsl:text>
-        </td>
-        <td>
-          <xsl:call-template name="Panel">
-            <xsl:with-param name="Text">
-              <xsl:choose>
-                <xsl:when test="kp:Registration">
-                  <xsl:call-template name="Value">
-                    <xsl:with-param name="Node" select="kp:Registration/kp:Name"/>
-                  </xsl:call-template>
-                  <xsl:call-template name="Value">
-                    <xsl:with-param name="Node" select="kp:Registration/kp:RestorCourt"/>
-                  </xsl:call-template>
-                  <xsl:choose>
-                    <xsl:when test="Registration/MdfDate">
-                      <br />
-                      <i style='mso-bidi-font-style:normal'>
-                        <xsl:text>Дата модификации:</xsl:text>
-                        <xsl:call-template name="Value">
-                          <xsl:with-param name="Node" select="Registration/MdfDate"/>
-                        </xsl:call-template>
-                      </i>
-                    </xsl:when>
-                  </xsl:choose>
-                </xsl:when>
-                <xsl:otherwise>
-                  <xsl:call-template name="Value">
-                    <xsl:with-param name="Node" select="kp:NoRegistration"/>
-                  </xsl:call-template>
-                </xsl:otherwise>
-              </xsl:choose>
-            </xsl:with-param>
-          </xsl:call-template>
-        </td>
-      </tr>
-      <tr>
-        <td>3.</td>
-        <td colspan="2">
-          <xsl:call-template name="Panel">
-            <xsl:with-param name="Text">
-              <xsl:text>Документы-основания:</xsl:text>
-            </xsl:with-param>
-          </xsl:call-template>
-        </td>
-        <td>
-          <xsl:text>3.</xsl:text>
-          <xsl:value-of select="position()"/>
-          <xsl:text>.</xsl:text>
-        </td>
-        <td>
-          <xsl:call-template name="Panel">
-            <xsl:with-param name="Text">
-              <xsl:choose>
-                <xsl:when test="kp:Registration/kp:DocFound">
-                  <xsl:for-each select="kp:Registration/kp:DocFound">
-                    <xsl:if test="not(position()=1)">
-                      <xsl:text>;</xsl:text>
-                      <br />
-                    </xsl:if>
-                    <xsl:call-template name="Value">
-                      <xsl:with-param name="Node" select="kp:Content"/>
-                    </xsl:call-template>
-                  </xsl:for-each>
-                </xsl:when>
-                <xsl:otherwise><xsl:text>сведения не предоставляются</xsl:text></xsl:otherwise>
-              </xsl:choose>
-            </xsl:with-param>
-          </xsl:call-template>
-        </td>
-      </tr>
-      <tr>
-        <td rowspan="{$Encumbrances*6+$Mdf_Encumb+1}">4.</td>
-        <td colspan="2">
-          <xsl:call-template name="Panel">
-            <xsl:with-param name="Text">
-              <xsl:text>Ограничение прав и обременение объекта недвижимости:</xsl:text>
-            </xsl:with-param>
-          </xsl:call-template>
-        </td>
-        <td colspan="2">
-          <xsl:call-template name="Panel">
-            <xsl:with-param name="Text">
-              <xsl:choose>
-                <xsl:when test="kp:Encumbrance">&#160;</xsl:when>
-                <xsl:otherwise>
-                  <xsl:call-template name="Value">
-                    <xsl:with-param name="Node" select="kp:NoEncumbrance"/>
-                  </xsl:call-template>
-                </xsl:otherwise>
-              </xsl:choose>
-            </xsl:with-param>
-          </xsl:call-template>
-        </td>
-      </tr>
+			<tr>
+				<td width="1%">1.</td>
+				<td width="40%" colspan="2">
+					<xsl:call-template name="Panel">
+						<xsl:with-param name="Text">
+							<xsl:text>Правообладатель (правообладатели):</xsl:text>
+						</xsl:with-param>
+					</xsl:call-template>
+				</td>
+				<td width="1%">
+					<xsl:text>1.</xsl:text>
+					<xsl:value-of select="position()"/>
+					<xsl:text>.</xsl:text>
+				</td>
+				<td>
+					<xsl:call-template name="Panel">
+						<xsl:with-param name="Text">
+							<xsl:choose>
+								<xsl:when test="kp:Owner">
+									<xsl:for-each select="kp:Owner">
+										<xsl:if test="not(position()=1)">
+											<xsl:text>;</xsl:text>
+											<br />
+										</xsl:if>
+										<xsl:choose>
+											<xsl:when test="kp:Person">
+												<xsl:call-template name="Value">
+													<xsl:with-param name="Node" select="kp:Person/kp:Content"/>
+												</xsl:call-template>
+												<xsl:choose>
+													<xsl:when test="Person/MdfDate">
+														<br />
+														<i style='mso-bidi-font-style:normal'>
+															<xsl:text>Дата модификации:</xsl:text>
+															<xsl:call-template name="Value">
+																<xsl:with-param name="Node" select="Person/MdfDate"/>
+															</xsl:call-template>
+														</i>
+													</xsl:when>
+												</xsl:choose>
+											</xsl:when>
+											<xsl:when test="kp:Organization">
+												<xsl:call-template name="Value">
+													<xsl:with-param name="Node" select="kp:Organization/kp:Content"/>
+												</xsl:call-template>
+												<xsl:choose>
+													<xsl:when test="Organization/MdfDate">
+														<br />
+														<i style='mso-bidi-font-style:normal'>
+															<xsl:text>Дата модификации:</xsl:text>
+															<xsl:call-template name="Value">
+																<xsl:with-param name="Node" select="Organization/MdfDate"/>
+															</xsl:call-template>
+														</i>
+													</xsl:when>
+												</xsl:choose>
+											</xsl:when>
+											<xsl:when test="kp:Governance">
+												<xsl:call-template name="Value">
+													<xsl:with-param name="Node" select="kp:Governance/kp:Content"/>
+												</xsl:call-template>
+											</xsl:when>
+										</xsl:choose>
+									</xsl:for-each>
+								</xsl:when>
+								<xsl:otherwise>
+									<xsl:call-template name="Value">
+										<xsl:with-param name="Node" select="kp:NoOwner"/>
+									</xsl:call-template>
+								</xsl:otherwise>
+							</xsl:choose>
+						</xsl:with-param>
+					</xsl:call-template>
+				</td>
+			</tr>
+			<xsl:choose>
+			<xsl:when test="kp:NoRegistration and kp:Owner">
+				<!--<br></br>-->
+			</xsl:when>
+			<xsl:otherwise>
+			<tr>
+				<td>2.</td>
+				<td colspan="2">
+					<xsl:call-template name="Panel">
+						<xsl:with-param name="Text">
+							<xsl:text>Вид, номер и дата государственной регистрации права:</xsl:text>
+						</xsl:with-param>
+					</xsl:call-template>
+				</td>
+				<td>
+					<xsl:text>2.</xsl:text>
+					<xsl:value-of select="position()"/>
+					<xsl:text>.</xsl:text>
+				</td>
+				<td>
+					<xsl:call-template name="Panel">
+						<xsl:with-param name="Text">
+							<xsl:choose>
+								<xsl:when test="kp:Registration">
+									<xsl:call-template name="Value">
+										<xsl:with-param name="Node" select="kp:Registration/kp:Name"/>
+									</xsl:call-template>
+									<xsl:call-template name="Value">
+										<xsl:with-param name="Node" select="kp:Registration/kp:RestorCourt"/>
+									</xsl:call-template>
+									<xsl:choose>
+										<xsl:when test="Registration/MdfDate">
+											<br />
+											<i style='mso-bidi-font-style:normal'>
+												<xsl:text>Дата модификации:</xsl:text>
+												<xsl:call-template name="Value">
+													<xsl:with-param name="Node" select="Registration/MdfDate"/>
+												</xsl:call-template>
+											</i>
+										</xsl:when>
+									</xsl:choose>
+								</xsl:when>
+								<xsl:otherwise>
+									<xsl:call-template name="Value">
+										<xsl:with-param name="Node" select="kp:NoRegistration"/>
+									</xsl:call-template>
+								</xsl:otherwise>
+							</xsl:choose>
+						</xsl:with-param>
+					</xsl:call-template>
+				</td>
+			</tr>
+			<tr>
+				<td>3.</td>
+				<td colspan="2">
+					<xsl:call-template name="Panel">
+						<xsl:with-param name="Text">
+							<xsl:text>Документы-основания:</xsl:text>
+						</xsl:with-param>
+					</xsl:call-template>
+				</td>
+				<td>
+					<xsl:text>3.</xsl:text>
+					<xsl:value-of select="position()"/>
+					<xsl:text>.</xsl:text>
+				</td>
+				<td>
+					<xsl:call-template name="Panel">
+						<xsl:with-param name="Text">
+							<xsl:choose>
+								<xsl:when test="kp:Registration/kp:DocFound">
+									<xsl:for-each select="kp:Registration/kp:DocFound">
+										<xsl:if test="not(position()=1)">
+											<xsl:text>;</xsl:text>
+											<br />
+										</xsl:if>
+										<xsl:call-template name="Value">
+											<xsl:with-param name="Node" select="kp:Content"/>
+										</xsl:call-template>
+									</xsl:for-each>
+								</xsl:when>
+								<xsl:otherwise><xsl:text>сведения не предоставляются</xsl:text></xsl:otherwise>
+							</xsl:choose>
+						</xsl:with-param>
+					</xsl:call-template>
+				</td>
+			</tr>
+			<tr>
+				<td rowspan="{$Encumbrances*6+$Mdf_Encumb+1}">4.</td>
+				<td colspan="2">
+					<xsl:call-template name="Panel">
+						<xsl:with-param name="Text">
+							<xsl:text>Ограничение прав и обременение объекта недвижимости:</xsl:text>
+						</xsl:with-param>
+					</xsl:call-template>
+				</td>
+				<td colspan="2">
+					<xsl:call-template name="Panel">
+						<xsl:with-param name="Text">
+							<xsl:choose>
+								<xsl:when test="kp:Encumbrance">&#160;</xsl:when>
+								<xsl:otherwise>
+									<xsl:call-template name="Value">
+										<xsl:with-param name="Node" select="kp:NoEncumbrance"/>
+									</xsl:call-template>
+								</xsl:otherwise>
+							</xsl:choose>
+						</xsl:with-param>
+					</xsl:call-template>
+				</td>
+			</tr>
 		<xsl:for-each select="kp:Encumbrance">
 			<xsl:variable name="Mdf_D" select="count(MdfDate)"/>
 			<xsl:if test="(position() mod 3) = 0">
@@ -4007,7 +4007,7 @@ if (CP && CP.lineTo){
 				</xsl:call-template>
 				<xsl:value-of disable-output-escaping="yes" select="concat('&lt;', 'table class=t border=1 cellpadding=2 cellspacing=0 width=100%', '&gt;')"/>
 			</xsl:if>
-        <tr>
+				<tr>
 		<xsl:if test="(position() mod 3) = 0">
 			<xsl:element name="td">
 				<xsl:attribute name="width">1%</xsl:attribute>
@@ -4020,239 +4020,239 @@ if (CP && CP.lineTo){
 				<xsl:text>&nbsp;</xsl:text>
 			</xsl:element>
 		</xsl:if>
-          <td rowspan="{6+$Mdf_D}" width="1%">
-            <xsl:text>4.</xsl:text>
-            <xsl:value-of select="$RightIndex"/>
-            <xsl:text>.</xsl:text>
-            <xsl:value-of select="position()"/>
-            <xsl:text>.</xsl:text>
-          </td>
-          <td>
-            <xsl:call-template name="Panel">
-              <xsl:with-param name="Text">
-                <xsl:text>вид:</xsl:text>
-              </xsl:with-param>
-            </xsl:call-template>
-          </td>
-          <td colspan="2">
-            <xsl:call-template name="Panel">
-              <xsl:with-param name="Text">
-                <xsl:call-template name="Value">
-                  <xsl:with-param name="Node" select="kp:Name"/>
-                </xsl:call-template>
-                <xsl:if test="kp:ShareText">
-                  <xsl:text>, </xsl:text>
-                  <xsl:call-template name="Value">
-                    <xsl:with-param name="Node" select="kp:ShareText"/>
-                  </xsl:call-template>
-                </xsl:if>
-              </xsl:with-param>
-            </xsl:call-template>
-          </td>
-        </tr>
-        <tr>
-          <td width="35%">
-            <xsl:call-template name="Panel">
-              <xsl:with-param name="Text">
-                <xsl:text>дата государственной регистрации:</xsl:text>
-              </xsl:with-param>
-            </xsl:call-template>
-          </td>
-          <td colspan="2">
-            <xsl:call-template name="Panel">
-              <xsl:with-param name="Text">
-                <xsl:call-template name="Value">
-                  <xsl:with-param name="Node" select="kp:RegDate"/>
-                </xsl:call-template>
-              </xsl:with-param>
-            </xsl:call-template>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <xsl:call-template name="Panel">
-              <xsl:with-param name="Text">
-                <xsl:text>номер государственной регистрации:</xsl:text>
-              </xsl:with-param>
-            </xsl:call-template>
-          </td>
-          <td colspan="2">
-            <xsl:call-template name="Panel">
-              <xsl:with-param name="Text">
-                <xsl:call-template name="Value">
-                  <xsl:with-param name="Node" select="kp:RegNumber"/>
-                </xsl:call-template>
-              </xsl:with-param>
-            </xsl:call-template>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <xsl:call-template name="Panel">
-              <xsl:with-param name="Text">
-                <xsl:text>срок, на который установлено ограничение прав и обременение объекта недвижимости:</xsl:text>
-              </xsl:with-param>
-            </xsl:call-template>
-          </td>
-          <td colspan="2">
-            <xsl:call-template name="Panel">
-              <xsl:with-param name="Text">
-                <xsl:choose>
-                  <xsl:when test="kp:Duration/kp:Term">
-                    <xsl:call-template name="Value">
-                      <xsl:with-param name="Node" select="kp:Duration/kp:Term"/>
-                    </xsl:call-template>
-                  </xsl:when>
-                  <xsl:when test="kp:Duration/kp:Started">
-                    <xsl:if test="kp:Duration/kp:Started">
-                      <xsl:text>с </xsl:text>
-                      <xsl:call-template name="Value">
-                        <xsl:with-param name="Node" select="kp:Duration/kp:Started"/>
-                      </xsl:call-template>
-                    </xsl:if>
-                    <xsl:if test="kp:Duration/kp:Stopped">
-                      <xsl:text> по </xsl:text>
-                      <xsl:call-template name="Value">
-                        <xsl:with-param name="Node" select="kp:Duration/kp:Stopped"/>
-                      </xsl:call-template>
-                    </xsl:if>
-                  </xsl:when>
-                  <xsl:otherwise>&#160;</xsl:otherwise>
-                </xsl:choose>
-              </xsl:with-param>
-            </xsl:call-template>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <xsl:call-template name="Panel">
-              <xsl:with-param name="Text">
-                <xsl:text>лицо, в пользу которого установлено ограничение прав и обременение объекта недвижимости:</xsl:text>
-              </xsl:with-param>
-            </xsl:call-template>
-          </td>
-          <td colspan="2">
-            <xsl:call-template name="Panel">
-              <xsl:with-param name="Text">
-                <xsl:choose>
-                  <xsl:when test="kp:Owner">
-                    <xsl:for-each select="kp:Owner">
-                      <xsl:if test="not(position()=1)">
-                        <xsl:text>;</xsl:text>
-                        <br />
-                      </xsl:if>
-                      <xsl:choose>
-                        <xsl:when test="kp:Person">
-                          <xsl:call-template name="Value">
-                            <xsl:with-param name="Node" select="kp:Person/kp:Content"/>
-                          </xsl:call-template>
-                          <xsl:choose>
-                            <xsl:when test="Person/MdfDate">
-                              <br />
-                              <i style='mso-bidi-font-style:normal'>
-                                <xsl:text>Дата модификации:</xsl:text>
-                                <xsl:call-template name="Value">
-                                  <xsl:with-param name="Node" select="Person/MdfDate"/>
-                                </xsl:call-template>
-                              </i>
-                            </xsl:when>
-                          </xsl:choose>
-                        </xsl:when>
-                        <xsl:when test="kp:Organization">
-                          <xsl:call-template name="Value">
-                            <xsl:with-param name="Node" select="kp:Organization/kp:Content"/>
-                          </xsl:call-template>
-                          <xsl:choose>
-                            <xsl:when test="Organization/MdfDate">
-                              <br />
-                              <i style='mso-bidi-font-style:normal'>
-                                <xsl:text>Дата модификации:</xsl:text>
-                                <xsl:call-template name="Value">
-                                  <xsl:with-param name="Node" select="Organization/MdfDate"/>
-                                </xsl:call-template>
-                              </i>
-                            </xsl:when>
-                          </xsl:choose>
-                        </xsl:when>
-                        <xsl:when test="kp:Governance">
-                          <xsl:call-template name="Value">
-                            <xsl:with-param name="Node" select="kp:Governance/kp:Content"/>
-                          </xsl:call-template>
-                        </xsl:when>
-                      </xsl:choose>
-                    </xsl:for-each>
-                  </xsl:when>
-                  <xsl:otherwise>
-                    <xsl:call-template name="Value">
-                      <xsl:with-param name="Node" select="kp:AllShareOwner"/>
-                    </xsl:call-template>
-                  </xsl:otherwise>
-                </xsl:choose>
-              </xsl:with-param>
-            </xsl:call-template>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <xsl:call-template name="Panel">
-              <xsl:with-param name="Text">
-                <xsl:text>основание государственной регистрации:</xsl:text>
-              </xsl:with-param>
-            </xsl:call-template>
-          </td>
-          <td colspan="2">
-            <xsl:call-template name="Panel">
-              <xsl:with-param name="Text">
-                <xsl:choose>
-                  <xsl:when test="kp:DocFound">
-                    <xsl:for-each select="kp:DocFound">
-                      <xsl:if test="not(position()=1)">
-                        <xsl:text>;</xsl:text>
-                        <br />
-                      </xsl:if>
-                      <xsl:call-template name="Value">
-                        <xsl:with-param name="Node" select="kp:Content"/>
-                      </xsl:call-template>
-                    </xsl:for-each>
-                  </xsl:when>
-                  <xsl:otherwise>&#160;</xsl:otherwise>
-                </xsl:choose>
-              </xsl:with-param>
-            </xsl:call-template>
-          </td>
-        </tr>
-        <xsl:choose>
-          <xsl:when test="MdfDate">
-            <tr>
-              <td>
-                <i style='mso-bidi-font-style:normal'>
-                  <xsl:call-template name="Panel">
-                    <xsl:with-param name="Text">
-                      <xsl:text>дата модификации:</xsl:text>
-                    </xsl:with-param>
-                  </xsl:call-template>
-                </i>
-              </td>
-              <td colspan="2">
-                <i style='mso-bidi-font-style:normal'>
-                  <xsl:call-template name="Panel">
-                    <xsl:with-param name="Text">
-                      <xsl:call-template name="Value">
-                        <xsl:with-param name="Node" select="MdfDate"/>
-                      </xsl:call-template>
-                    </xsl:with-param>
-                  </xsl:call-template>
-                </i>
-              </td>
-            </tr>
-          </xsl:when>
-        </xsl:choose>
-      </xsl:for-each>
-      </xsl:otherwise>
-      </xsl:choose>
-    </xsl:for-each>
-  </xsl:template>
-	
+					<td rowspan="{6+$Mdf_D}" width="1%">
+						<xsl:text>4.</xsl:text>
+						<xsl:value-of select="$RightIndex"/>
+						<xsl:text>.</xsl:text>
+						<xsl:value-of select="position()"/>
+						<xsl:text>.</xsl:text>
+					</td>
+					<td>
+						<xsl:call-template name="Panel">
+							<xsl:with-param name="Text">
+								<xsl:text>вид:</xsl:text>
+							</xsl:with-param>
+						</xsl:call-template>
+					</td>
+					<td colspan="2">
+						<xsl:call-template name="Panel">
+							<xsl:with-param name="Text">
+								<xsl:call-template name="Value">
+									<xsl:with-param name="Node" select="kp:Name"/>
+								</xsl:call-template>
+								<xsl:if test="kp:ShareText">
+									<xsl:text>, </xsl:text>
+									<xsl:call-template name="Value">
+										<xsl:with-param name="Node" select="kp:ShareText"/>
+									</xsl:call-template>
+								</xsl:if>
+							</xsl:with-param>
+						</xsl:call-template>
+					</td>
+				</tr>
+				<tr>
+					<td width="35%">
+						<xsl:call-template name="Panel">
+							<xsl:with-param name="Text">
+								<xsl:text>дата государственной регистрации:</xsl:text>
+							</xsl:with-param>
+						</xsl:call-template>
+					</td>
+					<td colspan="2">
+						<xsl:call-template name="Panel">
+							<xsl:with-param name="Text">
+								<xsl:call-template name="Value">
+									<xsl:with-param name="Node" select="kp:RegDate"/>
+								</xsl:call-template>
+							</xsl:with-param>
+						</xsl:call-template>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<xsl:call-template name="Panel">
+							<xsl:with-param name="Text">
+								<xsl:text>номер государственной регистрации:</xsl:text>
+							</xsl:with-param>
+						</xsl:call-template>
+					</td>
+					<td colspan="2">
+						<xsl:call-template name="Panel">
+							<xsl:with-param name="Text">
+								<xsl:call-template name="Value">
+									<xsl:with-param name="Node" select="kp:RegNumber"/>
+								</xsl:call-template>
+							</xsl:with-param>
+						</xsl:call-template>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<xsl:call-template name="Panel">
+							<xsl:with-param name="Text">
+								<xsl:text>срок, на который установлено ограничение прав и обременение объекта недвижимости:</xsl:text>
+							</xsl:with-param>
+						</xsl:call-template>
+					</td>
+					<td colspan="2">
+						<xsl:call-template name="Panel">
+							<xsl:with-param name="Text">
+								<xsl:choose>
+									<xsl:when test="kp:Duration/kp:Term">
+										<xsl:call-template name="Value">
+											<xsl:with-param name="Node" select="kp:Duration/kp:Term"/>
+										</xsl:call-template>
+									</xsl:when>
+									<xsl:when test="kp:Duration/kp:Started">
+										<xsl:if test="kp:Duration/kp:Started">
+											<xsl:text>с </xsl:text>
+											<xsl:call-template name="Value">
+												<xsl:with-param name="Node" select="kp:Duration/kp:Started"/>
+											</xsl:call-template>
+										</xsl:if>
+										<xsl:if test="kp:Duration/kp:Stopped">
+											<xsl:text> по </xsl:text>
+											<xsl:call-template name="Value">
+												<xsl:with-param name="Node" select="kp:Duration/kp:Stopped"/>
+											</xsl:call-template>
+										</xsl:if>
+									</xsl:when>
+									<xsl:otherwise>&#160;</xsl:otherwise>
+								</xsl:choose>
+							</xsl:with-param>
+						</xsl:call-template>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<xsl:call-template name="Panel">
+							<xsl:with-param name="Text">
+								<xsl:text>лицо, в пользу которого установлено ограничение прав и обременение объекта недвижимости:</xsl:text>
+							</xsl:with-param>
+						</xsl:call-template>
+					</td>
+					<td colspan="2">
+						<xsl:call-template name="Panel">
+							<xsl:with-param name="Text">
+								<xsl:choose>
+									<xsl:when test="kp:Owner">
+										<xsl:for-each select="kp:Owner">
+											<xsl:if test="not(position()=1)">
+												<xsl:text>;</xsl:text>
+												<br />
+											</xsl:if>
+											<xsl:choose>
+												<xsl:when test="kp:Person">
+													<xsl:call-template name="Value">
+														<xsl:with-param name="Node" select="kp:Person/kp:Content"/>
+													</xsl:call-template>
+													<xsl:choose>
+														<xsl:when test="Person/MdfDate">
+															<br />
+															<i style='mso-bidi-font-style:normal'>
+																<xsl:text>Дата модификации:</xsl:text>
+																<xsl:call-template name="Value">
+																	<xsl:with-param name="Node" select="Person/MdfDate"/>
+																</xsl:call-template>
+															</i>
+														</xsl:when>
+													</xsl:choose>
+												</xsl:when>
+												<xsl:when test="kp:Organization">
+													<xsl:call-template name="Value">
+														<xsl:with-param name="Node" select="kp:Organization/kp:Content"/>
+													</xsl:call-template>
+													<xsl:choose>
+														<xsl:when test="Organization/MdfDate">
+															<br />
+															<i style='mso-bidi-font-style:normal'>
+																<xsl:text>Дата модификации:</xsl:text>
+																<xsl:call-template name="Value">
+																	<xsl:with-param name="Node" select="Organization/MdfDate"/>
+																</xsl:call-template>
+															</i>
+														</xsl:when>
+													</xsl:choose>
+												</xsl:when>
+												<xsl:when test="kp:Governance">
+													<xsl:call-template name="Value">
+														<xsl:with-param name="Node" select="kp:Governance/kp:Content"/>
+													</xsl:call-template>
+												</xsl:when>
+											</xsl:choose>
+										</xsl:for-each>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:call-template name="Value">
+											<xsl:with-param name="Node" select="kp:AllShareOwner"/>
+										</xsl:call-template>
+									</xsl:otherwise>
+								</xsl:choose>
+							</xsl:with-param>
+						</xsl:call-template>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<xsl:call-template name="Panel">
+							<xsl:with-param name="Text">
+								<xsl:text>основание государственной регистрации:</xsl:text>
+							</xsl:with-param>
+						</xsl:call-template>
+					</td>
+					<td colspan="2">
+						<xsl:call-template name="Panel">
+							<xsl:with-param name="Text">
+								<xsl:choose>
+									<xsl:when test="kp:DocFound">
+										<xsl:for-each select="kp:DocFound">
+											<xsl:if test="not(position()=1)">
+												<xsl:text>;</xsl:text>
+												<br />
+											</xsl:if>
+											<xsl:call-template name="Value">
+												<xsl:with-param name="Node" select="kp:Content"/>
+											</xsl:call-template>
+										</xsl:for-each>
+									</xsl:when>
+									<xsl:otherwise>&#160;</xsl:otherwise>
+								</xsl:choose>
+							</xsl:with-param>
+						</xsl:call-template>
+					</td>
+				</tr>
+				<xsl:choose>
+					<xsl:when test="MdfDate">
+						<tr>
+							<td>
+								<i style='mso-bidi-font-style:normal'>
+									<xsl:call-template name="Panel">
+										<xsl:with-param name="Text">
+											<xsl:text>дата модификации:</xsl:text>
+										</xsl:with-param>
+									</xsl:call-template>
+								</i>
+							</td>
+							<td colspan="2">
+								<i style='mso-bidi-font-style:normal'>
+									<xsl:call-template name="Panel">
+										<xsl:with-param name="Text">
+											<xsl:call-template name="Value">
+												<xsl:with-param name="Node" select="MdfDate"/>
+											</xsl:call-template>
+										</xsl:with-param>
+									</xsl:call-template>
+								</i>
+							</td>
+						</tr>
+					</xsl:when>
+				</xsl:choose>
+			</xsl:for-each>
+			</xsl:otherwise>
+			</xsl:choose>
+		</xsl:for-each>
+	</xsl:template>
+
 	<xsl:template name="OrdinatePoly">
 		<xsl:param name="itemEntity"/>
 		<xsl:param name="itemElement"/>
@@ -4268,67 +4268,67 @@ if (CP && CP.lineTo){
 		</xsl:if>
 	</xsl:template>
 
-  <xsl:template name="Value">
-    <xsl:param name="Node"/>
-    <xsl:call-template name="Replace">
-      <xsl:with-param name="Old" select="'&#10;'"/>
-      <xsl:with-param name="New">
-        <br/>
-      </xsl:with-param>
-      <xsl:with-param name="Text">
-        <xsl:call-template name="Replace">
-          <xsl:with-param name="Old" select="';'"/>
-          <xsl:with-param name="New" select="'; '" />
-          <xsl:with-param name="Text">
-            <xsl:call-template name="Replace">
-              <xsl:with-param name="Old" select="','"/>
-              <xsl:with-param name="New" select="', '" />
-              <xsl:with-param name="Text" select="$Node" />
-            </xsl:call-template>
-          </xsl:with-param>
-        </xsl:call-template>
-      </xsl:with-param>
-    </xsl:call-template>
-  </xsl:template>
-  <xsl:template name="Panel">
-    <xsl:param name="Text"/>
-    <xsl:copy-of select="$Text"/>
-  </xsl:template>
-  <xsl:template name="Replace">
-    <xsl:param name="Text"/>
-    <xsl:param name="Old"/>
-    <xsl:param name="New"/>
-    <xsl:choose>
-      <xsl:when test="contains($Text, $Old)">
-        <xsl:variable name="Before" select="substring-before($Text, $Old)"/>
-        <xsl:value-of select="$Before"/>
-        <xsl:choose>
-          <xsl:when test="string($New)">
-            <xsl:value-of select="$New"/>
-          </xsl:when>
-          <xsl:otherwise>
-            <xsl:copy-of select="$New"/>
-          </xsl:otherwise>
-        </xsl:choose>
-        <xsl:call-template name="Replace">
-          <xsl:with-param name="Text">
-            <xsl:choose>
-              <xsl:when test="string-length($Before) > 0 and $Before = substring-before($Text, $New)">
-                <xsl:value-of select="substring-after($Text, $New)"/>
-              </xsl:when>
-              <xsl:otherwise>
-                <xsl:value-of select="substring-after($Text, $Old)"/>
-              </xsl:otherwise>
-            </xsl:choose>
-          </xsl:with-param>
-          <xsl:with-param name="Old" select="$Old"/>
-          <xsl:with-param name="New" select="$New"/>
-        </xsl:call-template>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:value-of select="$Text"/>
-      </xsl:otherwise>
-    </xsl:choose>
-  </xsl:template>
-		
+	<xsl:template name="Value">
+		<xsl:param name="Node"/>
+		<xsl:call-template name="Replace">
+			<xsl:with-param name="Old" select="'&#10;'"/>
+			<xsl:with-param name="New">
+				<br/>
+			</xsl:with-param>
+			<xsl:with-param name="Text">
+				<xsl:call-template name="Replace">
+					<xsl:with-param name="Old" select="';'"/>
+					<xsl:with-param name="New" select="'; '" />
+					<xsl:with-param name="Text">
+						<xsl:call-template name="Replace">
+							<xsl:with-param name="Old" select="','"/>
+							<xsl:with-param name="New" select="', '" />
+							<xsl:with-param name="Text" select="$Node" />
+						</xsl:call-template>
+					</xsl:with-param>
+				</xsl:call-template>
+			</xsl:with-param>
+		</xsl:call-template>
+	</xsl:template>
+	<xsl:template name="Panel">
+		<xsl:param name="Text"/>
+		<xsl:copy-of select="$Text"/>
+	</xsl:template>
+	<xsl:template name="Replace">
+		<xsl:param name="Text"/>
+		<xsl:param name="Old"/>
+		<xsl:param name="New"/>
+		<xsl:choose>
+			<xsl:when test="contains($Text, $Old)">
+				<xsl:variable name="Before" select="substring-before($Text, $Old)"/>
+				<xsl:value-of select="$Before"/>
+				<xsl:choose>
+					<xsl:when test="string($New)">
+						<xsl:value-of select="$New"/>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:copy-of select="$New"/>
+					</xsl:otherwise>
+				</xsl:choose>
+				<xsl:call-template name="Replace">
+					<xsl:with-param name="Text">
+						<xsl:choose>
+							<xsl:when test="string-length($Before) > 0 and $Before = substring-before($Text, $New)">
+								<xsl:value-of select="substring-after($Text, $New)"/>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="substring-after($Text, $Old)"/>
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:with-param>
+					<xsl:with-param name="Old" select="$Old"/>
+					<xsl:with-param name="New" select="$New"/>
+				</xsl:call-template>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="$Text"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
 </xsl:stylesheet>

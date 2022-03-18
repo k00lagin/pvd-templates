@@ -187,29 +187,29 @@ function load(id) {
 
 	$(canvas).mousedown(function mouseMove(event)
 	{
-		// Когда отпускаем мышку - перестаем 
+		// Когда отпускаем мышку - перестаем
 		$(document).bind('mouseup.cropper', function () {
 			$(document).unbind('mousemove.cropper');
 			$(document).unbind('mouseup.cropper');
 		});
-	
+
 		//Сохраняем координаты нажатия
 		var oldX = event.clientX, oldY = event.clientY;
-	
+
 		// Перемещаем все объекты по карте вместе с мышью
 		$(document).bind('mousemove.cropper', function (event) {
 			var x = event.clientX, y = event.clientY, newX = (oldX - x) * -1, newY = (oldY - y) * -1;
-	
+
 			originx = newX / scale;
 			originy = newY / scale;
-	
+
 			// Перемещаем объект
 			context.clearRect(0, 0, context.canvas.width, context.canvas.height);
 			context.translate(newX / scale, newY / scale);
-	
+
 			// Перерисовываем картинку
 			drawPre(context, id);
-	
+
 			// Обновляем координаты
 			oldX = x;
 			oldY = y;
@@ -217,7 +217,7 @@ function load(id) {
 		});
 		return false;
 	});
-	
+
 	for (var i = Coords.length - 1; i >= 0; i--) {
 		for (var z = 0; z < Coords[i].length; z++) {
 			if (Coords[i][z].length == 4) {
@@ -311,18 +311,18 @@ function drawAll(context) {
 				context.beginPath();
 				var rx = ((maxX - (Coords[i][z][1] + (Coords[i][z][3] * Math.cos(2 * Math.PI)))) / koef) + offX;
 				var ry = (((Coords[i][z][2] + (Coords[i][z][3] * Math.sin(2 * Math.PI))) - minY) / koef) + offY;
-				
+
 				if (Coords[i][0][0].charAt(0) == 'R'){
 					context.fillStyle = "Black";
 					var dotsPerCircle=60;
 					var interval=(Math.PI*2)/dotsPerCircle;
-					
+
 					for(var d = 0; d < dotsPerCircle; d++){
 						desiredRadianAngleOnCircle = interval*d;
-						
+
 						var x = y1 + (x1 - rx) * Math.cos(desiredRadianAngleOnCircle);
 						var y = x1 + (x1 - rx) * Math.sin(desiredRadianAngleOnCircle);
-						
+
 						context.beginPath();
 						context.arc(x, y, 1, 0, 2 * Math.PI);
 						context.closePath();
@@ -331,9 +331,9 @@ function drawAll(context) {
 				}
 				else if (Coords[i][0][0].charAt(0) == 'P'){
 					context.fillStyle = "Black";
-					
+
 					var pointArray= calcPointsCirc(y1, x1, x1 - rx, 1);
-					
+
 					for(p = 0; p < pointArray.length; p++){
 						context.moveTo(pointArray[p].x, pointArray[p].y);
 						context.lineTo(pointArray[p].ex, pointArray[p].ey);
@@ -342,7 +342,7 @@ function drawAll(context) {
 				}
 				else
 					context.arc(y1, x1, x1 - rx, 0, 2 * Math.PI);
-					
+
 				polygon[polygon.length] = new Point(y1, x1);
 				context.restore();
 			}
@@ -362,7 +362,7 @@ function drawAll(context) {
 				center.y = polygon[1].y;
 			}
 		}
-		
+
 		if (Coords[i][0][0].charAt(0) == 'Z')
 			context.fillStyle = "Black";
 		else
@@ -528,12 +528,12 @@ function calcPointsCirc(cx, cy, rad, dashLength){
 	{
 		var theta = alpha * i,
 		theta2 = alpha * (i + 1);
-		
+
 		points.push({x : (Math.cos(theta) * rad) + cx, y : (Math.sin(theta) * rad) + cy, ex : (Math.cos(theta2) * rad) + cx, ey : (Math.sin(theta2) * rad) + cy});
 		i += 2;
-	}              
-	return points;            
-} 
+	}
+	return points;
+}
 
 var CP = window.CanvasRenderingContext2D && CanvasRenderingContext2D.prototype;
 if (CP && CP.lineTo){
@@ -1412,16 +1412,16 @@ if (CP && CP.lineTo){
 				</tr>
 			</xsl:if>
 			<!-- <tr valign="top">
-        <td width="35%" style="text-align:left">
-          <xsl:text>Категория земель: </xsl:text>
-        </td>
-        <td style="text-align:left">
-          <xsl:apply-templates select="kv:GroundCategoryText"/>
-          <xsl:if test="not(kv:GroundCategoryText)">
-            <xsl:call-template name="procherk"/>
-          </xsl:if>
-        </td>
-      </tr>-->
+				<td width="35%" style="text-align:left">
+					<xsl:text>Категория земель: </xsl:text>
+				</td>
+				<td style="text-align:left">
+					<xsl:apply-templates select="kv:GroundCategoryText"/>
+					<xsl:if test="not(kv:GroundCategoryText)">
+						<xsl:call-template name="procherk"/>
+					</xsl:if>
+				</td>
+			</tr>-->
 			<xsl:if test="$ObjType='002002001000' or $ObjType='002002004000'">
 				<!--здание или сооружение-->
 				<tr valign="top">
@@ -1469,7 +1469,7 @@ if (CP && CP.lineTo){
 					</xsl:if>
 					<xsl:if test="$ObjType='002002000000' and $ObjTypeText='Единый недвижимый комплекс'">
 						<!--это ЕНК-->
-						<xsl:text>Сведения, необходимые  для заполнения Раздела 5 "Описание местоположения объекта недвижимости", отсутствуют.</xsl:text>
+						<xsl:text>Сведения, необходимые для заполнения Раздела 5 "Описание местоположения объекта недвижимости", отсутствуют.</xsl:text>
 					</xsl:if>
 				</td>
 			</tr>
@@ -2395,22 +2395,22 @@ if (CP && CP.lineTo){
 													var id = '<xsl:value-of select="$canvas"/>';
 													canvas = document.getElementById(id);
 													if (!canvas.getContext) return;
-													
+
 													context = canvas.getContext("2d");
-													
+
 													// Отрисовка по таймеру
 													setInterval(drawPoly<xsl:value-of select="$index_cur"/>, 100, canvas, context, CoordsNew, minX, maxX, minY, maxY);
-												
+
 													// Обработчик колеса мыши
 													canvas.onmousewheel = function (event) {
 														var mousex = event.clientX - canvas.offsetLeft;
 														var mousey = event.clientY - canvas.offsetTop;
 														var wheel = event.wheelDelta / 120;
-												
+
 														var zoom = Math.pow(1 + Math.abs(wheel) / 2, wheel > 0 ? 1 : -1);
-												
+
 														zoomTo(context, mousex, mousey, zoom);
-												
+
 														if (event.preventDefault) {
 															event.preventDefault();
 														}
@@ -2418,29 +2418,29 @@ if (CP && CP.lineTo){
 													var scale = 1;
 													$(canvas).mousedown(function mouseMove(event)
 													{
-														// Когда отпускаем мышку - перестаем 
+														// Когда отпускаем мышку - перестаем
 														$(document).bind('mouseup.cropper', function () {
 															$(document).unbind('mousemove.cropper');
 															$(document).unbind('mouseup.cropper');
 														});
-													
+
 														//Сохраняем координаты нажатия
 														var oldX = event.clientX, oldY = event.clientY;
-													
+
 														// Перемещаем все объекты по карте вместе с мышью
 														$(document).bind('mousemove.cropper', function (event) {
 															var x = event.clientX, y = event.clientY, newX = (oldX - x) * -1, newY = (oldY - y) * -1;
-													
+
 															originx = newX / scale;
 															originy = newY / scale;
-													
+
 															// Перемещаем объект
 															context.clearRect(0, 0, context.canvas.width, context.canvas.height);
 															context.translate(newX / scale, newY / scale);
-													
+
 															// Перерисовываем картинку
 															drawPoly<xsl:value-of select="$index_cur"/>(canvas, context, CoordsNew, minX, maxX, minY, maxY);
-													
+
 															// Обновляем координаты
 															oldX = x;
 															oldY = y;
@@ -2448,46 +2448,46 @@ if (CP && CP.lineTo){
 														});
 														return false;
 													});
-													
+
 													drawPoly<xsl:value-of select="$index_cur"/>(canvas, context, CoordsNew, minX, maxX, minY, maxY);
 												};
 												load<xsl:value-of select="$index_cur"/>();
 												function drawPoly<xsl:value-of select="$index_cur"/>(canvas, context, CoordsNew, minX, maxX, minY, maxY){
 												<![CDATA[
 													context.fillStyle = "white";
-												
+
 													var width = 700;
 													var height = 600;
-												
+
 													context.save();
 													context.setTransform(1, 0, 0, 1, 0, 0);
 													context.clearRect(0, 0, canvas.width, canvas.height);
 													context.restore();
-												
+
 													var cX = maxY - minY;
 													var cY = maxX - minX;
-												
+
 													// Коэффициент масштабирования
 													var koef;
 													var koefX = cX / width;
 													var koefY = cY / height;
 													if (koefX < koefY) koef = koefY; else koef = koefX;
-												
+
 													// Смещение координат для центрирования
 													var offX = 0;
 													var offY = 0;
 													//if (cX < height) offY = (height - cX) / 2; else offX = (width - cY) / 2;
-												
+
 													for (var i = CoordsNew.length - 1; i >= 0; i--) {
 														var polygon = [];
 														context.save();
 														context.beginPath();
 														context.lineWidth = 2;
-												
+
 														for (var z = 0; z < CoordsNew[i].length; z++) {
 															x1 = ((maxX - CoordsNew[i][z][1]) / koef) + offX;
 															y1 = ((CoordsNew[i][z][2] - minY) / koef) + offY;
-												
+
 															if (CoordsNew[i][z].length > 4) {
 																x2p = x1;
 																y2p = y1;
@@ -2495,14 +2495,14 @@ if (CP && CP.lineTo){
 																for (var j = 1; j < CoordsNew[i][z].length / 2; j++) {
 																	x2 = ((maxX - CoordsNew[i][z][(j * 2) - 1]) / koef) + offX;
 																	y2 = ((CoordsNew[i][z][j * 2] - minY) / koef) + offY;
-												
+
 																	if (CoordsNew[i][0][0].charAt(0) == 'R')
 																		context.dashedLine(y2p, x2p, y2, x2, [2, 5]);
 																	else if (CoordsNew[i][0][0].charAt(0) == 'P')
 																		context.dashedLine(y2p, x2p, y2, x2, [8, 5]);
 																	else
 																		context.lineTo(y2, x2);
-												
+
 																	polygon[j - 1] = new Point(y2, x2);
 																	x2p = x2;
 																	y2p = y2;
@@ -2513,18 +2513,18 @@ if (CP && CP.lineTo){
 																context.beginPath();
 																var rx = ((maxX - (CoordsNew[i][z][1] + (CoordsNew[i][z][3] * Math.cos(2 * Math.PI)))) / koef) + offX;
 																var ry = (((CoordsNew[i][z][2] + (CoordsNew[i][z][3] * Math.sin(2 * Math.PI))) - minY) / koef) + offY;
-																
+
 																if (CoordsNew[i][0][0].charAt(0) == 'R'){
 																	context.fillStyle = "Black";
 																	var dotsPerCircle=60;
 																	var interval=(Math.PI*2)/dotsPerCircle;
-																	
+
 																	for(var d = 0; d < dotsPerCircle; d++){
 																		desiredRadianAngleOnCircle = interval*d;
-																		
+
 																		var x = y1 + (x1 - rx) * Math.cos(desiredRadianAngleOnCircle);
 																		var y = x1 + (x1 - rx) * Math.sin(desiredRadianAngleOnCircle);
-																		
+
 																		context.beginPath();
 																		context.arc(x, y, 1, 0, 2 * Math.PI);
 																		context.closePath();
@@ -2533,9 +2533,9 @@ if (CP && CP.lineTo){
 																}
 																else if (CoordsNew[i][0][0].charAt(0) == 'P'){
 																	context.fillStyle = "Black";
-																	
+
 																	var pointArray= calcPointsCirc(y1, x1, x1 - rx, 1);
-																	
+
 																	for(p = 0; p < pointArray.length; p++){
 																		context.moveTo(pointArray[p].x, pointArray[p].y);
 																		context.lineTo(pointArray[p].ex, pointArray[p].ey);
@@ -2544,15 +2544,15 @@ if (CP && CP.lineTo){
 																}
 																else
 																	context.arc(y1, x1, x1 - rx, 0, 2 * Math.PI);
-																	
+
 																polygon[polygon.length] = new Point(y1, x1);
 																context.restore();
 															}
 														}
-												
+
 														context.stroke();
 														context.restore();
-												
+
 														var center = (new Contour(polygon)).centroid();
 														if (isNaN(center.x) && isNaN(center.y)){
 															if (polygon.length==1){
@@ -2564,7 +2564,7 @@ if (CP && CP.lineTo){
 																center.y = polygon[1].y;
 															}
 														}
-														
+
 														if (CoordsNew[i][0][0].charAt(0) == 'Z')
 															context.fillStyle = "Black";
 														else
@@ -3270,17 +3270,17 @@ if (CP && CP.lineTo){
 												</xsl:if>
 											</th>
 											<th>
-                        <!--<xsl:value-of select="kv:PositionInObject//kv:Position/@NumberOnPlan"/>-->
-                        <xsl:if test="kv:PositionInObject/kv:Levels">
-                          <xsl:variable name="var" select="document('schema/KVOKS_v07/SchemaCommon/dTypeStorey_v01.xsd')"/>
-                          <xsl:for-each select="kv:PositionInObject/kv:Levels/kv:Level">                            
-                            <xsl:value-of select="./kv:Position/@NumberOnPlan"/>
-                            <xsl:if test="position()!=last()">, </xsl:if>
-                          </xsl:for-each>
-                        </xsl:if>
-                        <xsl:if test="not(kv:PositionInObject/kv:Levels)">
-                          <xsl:call-template name="procherk"/>
-                        </xsl:if>
+												<!--<xsl:value-of select="kv:PositionInObject//kv:Position/@NumberOnPlan"/>-->
+												<xsl:if test="kv:PositionInObject/kv:Levels">
+													<xsl:variable name="var" select="document('schema/KVOKS_v07/SchemaCommon/dTypeStorey_v01.xsd')"/>
+													<xsl:for-each select="kv:PositionInObject/kv:Levels/kv:Level">
+														<xsl:value-of select="./kv:Position/@NumberOnPlan"/>
+														<xsl:if test="position()!=last()">, </xsl:if>
+													</xsl:for-each>
+												</xsl:if>
+												<xsl:if test="not(kv:PositionInObject/kv:Levels)">
+													<xsl:call-template name="procherk"/>
+												</xsl:if>
 											</th>
 											<th>
 												<xsl:call-template name="procherk"/>
@@ -4049,9 +4049,9 @@ if (CP && CP.lineTo){
 					<span name="all_sheets">
 						<!--<u>
 								<b>
-								  &nbsp;<xsl:value-of select="$allSheets"/>&nbsp;
+									&nbsp;<xsl:value-of select="$allSheets"/>&nbsp;
 								</b>
-							  </u>-->
+								</u>-->
 								___
 						</span>
 				</td>
@@ -4066,11 +4066,11 @@ if (CP && CP.lineTo){
 			<tr>
 				<td colspan="4">
 					<b>
-            &nbsp;<xsl:value-of select="$DeclarAttribute/@ExtractDate"/>&nbsp;
-            <xsl:if test="$DeclarAttribute/@ExtractNumber!='0'">
-              &nbsp;<xsl:text> № </xsl:text>&nbsp;
-              &nbsp;<xsl:value-of select="$DeclarAttribute/@ExtractNumber"/>&nbsp;
-            </xsl:if>
+						&nbsp;<xsl:value-of select="$DeclarAttribute/@ExtractDate"/>&nbsp;
+						<xsl:if test="$DeclarAttribute/@ExtractNumber!='0'">
+							&nbsp;<xsl:text> № </xsl:text>&nbsp;
+							&nbsp;<xsl:value-of select="$DeclarAttribute/@ExtractNumber"/>&nbsp;
+						</xsl:if>
 					</b>
 				</td>
 			</tr>

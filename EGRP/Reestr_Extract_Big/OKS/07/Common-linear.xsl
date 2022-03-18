@@ -59,7 +59,7 @@
 
 	<xsl:variable name="smallcase" select="'абвгдеёжзийклмнопрстуфхцчшщьыъэюя'"/>
 	<xsl:variable name="uppercase" select="'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЬЫЪЭЮЯ'"/>
-	
+
 	<xsl:template match="kv:KVOKSLinear">
 		<xsl:apply-templates select="kv:Realty"/>
 	</xsl:template>
@@ -125,54 +125,54 @@ var Coords = new Array();
 function load(id) {
 	var canvas;
 	var context;
-    canvas = document.getElementById(id);
-    if (!canvas.getContext) return;
+		canvas = document.getElementById(id);
+		if (!canvas.getContext) return;
 
-    context = canvas.getContext("2d");
+		context = canvas.getContext("2d");
 
-    // Отрисовка по таймеру
-    setInterval(drawPre, 100, context, id);
+		// Отрисовка по таймеру
+		setInterval(drawPre, 100, context, id);
 
-    // Обработчик колеса мыши
-    canvas.onmousewheel = function (event) {
-        var mousex = event.clientX - canvas.offsetLeft;
-        var mousey = event.clientY - canvas.offsetTop;
-        var wheel = event.wheelDelta / 120;
+		// Обработчик колеса мыши
+		canvas.onmousewheel = function (event) {
+				var mousex = event.clientX - canvas.offsetLeft;
+				var mousey = event.clientY - canvas.offsetTop;
+				var wheel = event.wheelDelta / 120;
 
-        var zoom = Math.pow(1 + Math.abs(wheel) / 2, wheel > 0 ? 1 : -1);
+				var zoom = Math.pow(1 + Math.abs(wheel) / 2, wheel > 0 ? 1 : -1);
 
-        zoomTo(context, mousex, mousey, zoom);
+				zoomTo(context, mousex, mousey, zoom);
 
-        if (event.preventDefault) {
-            event.preventDefault();
-        }
-    }
+				if (event.preventDefault) {
+						event.preventDefault();
+				}
+		}
 
-    $(canvas).mousedown(function mouseMove(event)
-    {
-		// Когда отпускаем мышку - перестаем 
+	 $(canvas).mousedown(function mouseMove(event)
+		{
+		// Когда отпускаем мышку - перестаем
 		$(document).bind('mouseup.cropper', function () {
 			$(document).unbind('mousemove.cropper');
 			$(document).unbind('mouseup.cropper');
 		});
-	
+
 		//Сохраняем координаты нажатия
 		var oldX = event.clientX, oldY = event.clientY;
-	
+
 		// Перемещаем все объекты по карте вместе с мышью
 		$(document).bind('mousemove.cropper', function (event) {
 			var x = event.clientX, y = event.clientY, newX = (oldX - x) * -1, newY = (oldY - y) * -1;
-	
+
 			originx = newX / scale;
 			originy = newY / scale;
-	
+
 			// Перемещаем объект
 			context.clearRect(0, 0, context.canvas.width, context.canvas.height);
 			context.translate(newX / scale, newY / scale);
-	
+
 			// Перерисовываем картинку
 			drawPre(context, id);
-	
+
 			// Обновляем координаты
 			oldX = x;
 			oldY = y;
@@ -180,31 +180,31 @@ function load(id) {
 		});
 		return false;
 	});
-	
-    for (var i = Coords.length - 1; i >= 0; i--) {
-        for (var z = 0; z < Coords[i].length; z++) {
-            if (Coords[i][z].length == 4) {
-                var rx = Coords[i][z][1] + (Coords[i][z][3] * Math.sin(2 * Math.PI));
-                var ry = Coords[i][z][2] + (Coords[i][z][3] * Math.cos(2 * Math.PI));
-                if ((rx - Coords[i][z][1]) + maxX > maxX) {
-                    maxX = maxX + (rx - Coords[i][z][1]);
-                    maxY = maxY + (rx - Coords[i][z][1]);
-                }
-                if ((ry - Coords[i][z][2]) + maxY > maxY) {
-                    maxY = maxY + (ry - Coords[i][z][2]);
-                    maxX = maxX + (ry - Coords[i][z][2]);
-                }
-            }
-        }
-    }
 
-    drawPre(context, id);
+		for (var i = Coords.length - 1; i >= 0; i--) {
+				for (var z = 0; z < Coords[i].length; z++) {
+						if (Coords[i][z].length == 4) {
+								var rx = Coords[i][z][1] + (Coords[i][z][3] * Math.sin(2 * Math.PI));
+								var ry = Coords[i][z][2] + (Coords[i][z][3] * Math.cos(2 * Math.PI));
+								if ((rx - Coords[i][z][1]) + maxX > maxX) {
+										maxX = maxX + (rx - Coords[i][z][1]);
+										maxY = maxY + (rx - Coords[i][z][1]);
+								}
+								if ((ry - Coords[i][z][2]) + maxY > maxY) {
+										maxY = maxY + (ry - Coords[i][z][2]);
+										maxX = maxX + (ry - Coords[i][z][2]);
+								}
+						}
+				}
+		}
+
+		drawPre(context, id);
 };
 
 function drawPre(context, id){
-    var idc = Coords.length - 1;
-    if (!isNaN(parseInt(id.substring(6, 7))))
-        idc = parseInt(id.substring(6, 7));
+		var idc = Coords.length - 1;
+		if (!isNaN(parseInt(id.substring(6, 7))))
+				idc = parseInt(id.substring(6, 7));
 
 	if(id=='canvas')
 		drawAll(context);
@@ -215,47 +215,47 @@ function drawPre(context, id){
 
 // Отрисовка всех контуров
 function drawAll(context) {
-    context.fillStyle = "white";
+		context.fillStyle = "white";
 
-    var width = 700;
-    var height = 600;
+		var width = 700;
+		var height = 600;
 
-    context.save();
-    context.setTransform(1, 0, 0, 1, 0, 0);
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    context.restore();
+		context.save();
+		context.setTransform(1, 0, 0, 1, 0, 0);
+		context.clearRect(0, 0, canvas.width, canvas.height);
+		context.restore();
 
-    var cX = maxY - minY;
-    var cY = maxX - minX;
+		var cX = maxY - minY;
+		var cY = maxX - minX;
 
-    // Коэффициент масштабирования
-    var koef;
-    var koefX = cX / width;
-    var koefY = cY / height;
-    if (koefX < koefY) koef = koefY; else koef = koefX;
+		// Коэффициент масштабирования
+		var koef;
+		var koefX = cX / width;
+		var koefY = cY / height;
+		if (koefX < koefY) koef = koefY; else koef = koefX;
 
-    // Смещение координат для центрирования
-    var offX = 0;
-    var offY = 0;
-    //if (cX < height) offY = (height - cX) / 2; else offX = (width - cY) / 2;
+		// Смещение координат для центрирования
+		var offX = 0;
+		var offY = 0;
+		//if (cX < height) offY = (height - cX) / 2; else offX = (width - cY) / 2;
 
-    for (var i = Coords.length - 1; i >= 0; i--) {
-        var polygon = [];
-        context.save();
-        context.beginPath();
-        context.lineWidth = 2;
+		for (var i = Coords.length - 1; i >= 0; i--) {
+				var polygon = [];
+				context.save();
+				context.beginPath();
+				context.lineWidth = 2;
 
-        for (var z = 0; z < Coords[i].length; z++) {
-            x1 = ((maxX - Coords[i][z][1]) / koef) + offX;
-            y1 = ((Coords[i][z][2] - minY) / koef) + offY;
+				for (var z = 0; z < Coords[i].length; z++) {
+						x1 = ((maxX - Coords[i][z][1]) / koef) + offX;
+						y1 = ((Coords[i][z][2] - minY) / koef) + offY;
 
-            if (Coords[i][z].length > 4) {
-                x2p = x1;
-                y2p = y1;
-                context.moveTo(y1, x1);
-                for (var j = 1; j < Coords[i][z].length / 2; j++) {
-                    x2 = ((maxX - Coords[i][z][(j * 2) - 1]) / koef) + offX;
-                    y2 = ((Coords[i][z][j * 2] - minY) / koef) + offY;
+						if (Coords[i][z].length > 4) {
+								x2p = x1;
+								y2p = y1;
+								context.moveTo(y1, x1);
+								for (var j = 1; j < Coords[i][z].length / 2; j++) {
+										x2 = ((maxX - Coords[i][z][(j * 2) - 1]) / koef) + offX;
+										y2 = ((Coords[i][z][j * 2] - minY) / koef) + offY;
 
 					if (Coords[i][0][0].charAt(0) == 'R')
 						context.dashedLine(y2p, x2p, y2, x2, [2, 5]);
@@ -264,28 +264,28 @@ function drawAll(context) {
 					else
 						context.lineTo(y2, x2);
 
-                    polygon[j - 1] = new Point(y2, x2);
-                    x2p = x2;
-                    y2p = y2;
-                }
-            }
-            else {
-                context.stroke();
-                context.beginPath();
-                var rx = ((maxX - (Coords[i][z][1] + (Coords[i][z][3] * Math.cos(2 * Math.PI)))) / koef) + offX;
-                var ry = (((Coords[i][z][2] + (Coords[i][z][3] * Math.sin(2 * Math.PI))) - minY) / koef) + offY;
-                
+										polygon[j - 1] = new Point(y2, x2);
+										x2p = x2;
+										y2p = y2;
+								}
+						}
+						else {
+								context.stroke();
+								context.beginPath();
+								var rx = ((maxX - (Coords[i][z][1] + (Coords[i][z][3] * Math.cos(2 * Math.PI)))) / koef) + offX;
+								var ry = (((Coords[i][z][2] + (Coords[i][z][3] * Math.sin(2 * Math.PI))) - minY) / koef) + offY;
+
 				if (Coords[i][0][0].charAt(0) == 'R'){
 					context.fillStyle = "Black";
 					var dotsPerCircle=60;
 					var interval=(Math.PI*2)/dotsPerCircle;
-					
+
 					for(var d = 0; d < dotsPerCircle; d++){
 						desiredRadianAngleOnCircle = interval*d;
-						
+
 						var x = y1 + (x1 - rx) * Math.cos(desiredRadianAngleOnCircle);
 						var y = x1 + (x1 - rx) * Math.sin(desiredRadianAngleOnCircle);
-						
+
 						context.beginPath();
 						context.arc(x, y, 1, 0, 2 * Math.PI);
 						context.closePath();
@@ -294,9 +294,9 @@ function drawAll(context) {
 				}
 				else if (Coords[i][0][0].charAt(0) == 'P'){
 					context.fillStyle = "Black";
-					
+
 					var pointArray= calcPointsCirc(y1, x1, x1 - rx, 1);
-					
+
 					for(p = 0; p < pointArray.length; p++){
 						context.moveTo(pointArray[p].x, pointArray[p].y);
 						context.lineTo(pointArray[p].ex, pointArray[p].ey);
@@ -305,16 +305,16 @@ function drawAll(context) {
 				}
 				else
 					context.arc(y1, x1, x1 - rx, 0, 2 * Math.PI);
-					
-                polygon[polygon.length] = new Point(y1, x1);
-                context.restore();
-            }
-        }
 
-        context.stroke();
-        context.restore();
+								polygon[polygon.length] = new Point(y1, x1);
+								context.restore();
+						}
+				}
 
-        var center = (new Contour(polygon)).centroid();
+				context.stroke();
+				context.restore();
+
+				var center = (new Contour(polygon)).centroid();
 		if (isNaN(center.x) && isNaN(center.y)){
 			if (polygon.length==1){
 				center.x = polygon[0].x;
@@ -325,50 +325,50 @@ function drawAll(context) {
 				center.y = polygon[1].y;
 			}
 		}
-		
+
 		if (Coords[i][0][0].charAt(0) == 'Z')
 			context.fillStyle = "Black";
 		else
 			context.fillStyle = "Gray";
-        context.fillText(Coords[i][0][0].substring(1), center.x - (0.5 * context.measureText(Coords[i][0][0].substring(1)).width), center.y);
-    }
+				context.fillText(Coords[i][0][0].substring(1), center.x - (0.5 * context.measureText(Coords[i][0][0].substring(1)).width), center.y);
+		}
 };
 
 // Отрисовка полигона
 function drawPolygon(context, i) {
-    context.fillStyle = "white";
+		context.fillStyle = "white";
 
-    var width = 700;
-    var height = 600;
+		var width = 700;
+		var height = 600;
 
-    var minX = eval('minX' + i);
-    var minY = eval('minY' + i);
-    var maxX = eval('maxX' + i);
-    var maxY = eval('maxY' + i);
+		var minX = eval('minX' + i);
+		var minY = eval('minY' + i);
+		var maxX = eval('maxX' + i);
+		var maxY = eval('maxY' + i);
 
-    context.save();
-    context.setTransform(1, 0, 0, 1, 0, 0);
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    context.restore();
+		context.save();
+		context.setTransform(1, 0, 0, 1, 0, 0);
+		context.clearRect(0, 0, canvas.width, canvas.height);
+		context.restore();
 
-    var cX = maxY - minY;
-    var cY = maxX - minX;
+		var cX = maxY - minY;
+		var cY = maxX - minX;
 
-    // Коэффициент масштабирования
-    var koef;
-    var koefX = cX / width;
-    var koefY = cY / height;
-    if (koefX < koefY) koef = koefY; else koef = koefX;
-    if (koef==0) koef=1;
+		// Коэффициент масштабирования
+		var koef;
+		var koefX = cX / width;
+		var koefY = cY / height;
+		if (koefX < koefY) koef = koefY; else koef = koefX;
+		if (koef==0) koef=1;
 
-    // Смещение координат для центрирования
-    var offX = 0;
-    var offY = 0;
-    //if (cY < height) offY = (height - cY) / 2; else offX = (width - cX) / 2;
+		// Смещение координат для центрирования
+		var offX = 0;
+		var offY = 0;
+		//if (cY < height) offY = (height - cY) / 2; else offX = (width - cX) / 2;
 
 	var polygon = [];
-    context.save();
-    context.beginPath();
+		context.save();
+		context.beginPath();
 
 	for (var z = 0; z < Coords[i].length; z++) {
 		x1 = ((maxX - Coords[i][z][1]) / koef) + offX;
@@ -403,8 +403,8 @@ function drawPolygon(context, i) {
 		}
 	}
 
-    context.stroke();
-    context.restore();
+		context.stroke();
+		context.restore();
 
 	var center = (new Contour(polygon)).centroid();
 	if (isNaN(center.x) && isNaN(center.y)){
@@ -424,61 +424,61 @@ function drawPolygon(context, i) {
 
 // Точка центроида
 function Point(x, y) {
-    this.x = x;
-    this.y = y;
+		this.x = x;
+		this.y = y;
 };
 
 // Контур объекта
 function Contour(a) {
-    this.pts = a || [];
+		this.pts = a || [];
 };
 
 // Площадь объекта
 Contour.prototype.area = function () {
-    var area = 0;
-    var pts = this.pts;
-    var nPts = pts.length;
-    var j = nPts - 1;
-    var p1; var p2;
+		var area = 0;
+		var pts = this.pts;
+		var nPts = pts.length;
+		var j = nPts - 1;
+		var p1; var p2;
 
-    for (var i = 0; i < nPts; j = i++) {
-        p1 = pts[i]; p2 = pts[j];
-        area += p1.x * p2.y;
-        area -= p1.y * p2.x;
-    }
-    area /= 2;
-    return area;
+		for (var i = 0; i < nPts; j = i++) {
+				p1 = pts[i]; p2 = pts[j];
+				area += p1.x * p2.y;
+				area -= p1.y * p2.x;
+		}
+		area /= 2;
+		return area;
 };
 
 // Центроид объекта
 Contour.prototype.centroid = function () {
-    var pts = this.pts;
-    var nPts = pts.length;
-    var x = 0; var y = 0;
-    var f;
-    var j = nPts - 1;
-    var p1; var p2;
+		var pts = this.pts;
+		var nPts = pts.length;
+		var x = 0; var y = 0;
+		var f;
+		var j = nPts - 1;
+		var p1; var p2;
 
-    for (var i = 0; i < nPts; j = i++) {
-        p1 = pts[i]; p2 = pts[j];
-        f = p1.x * p2.y - p2.x * p1.y;
-        x += (p1.x + p2.x) * f;
-        y += (p1.y + p2.y) * f;
-    }
+		for (var i = 0; i < nPts; j = i++) {
+				p1 = pts[i]; p2 = pts[j];
+				f = p1.x * p2.y - p2.x * p1.y;
+				x += (p1.x + p2.x) * f;
+				y += (p1.y + p2.y) * f;
+		}
 
-    f = this.area() * 6;
-    return new Point(x / f, y / f);
+		f = this.area() * 6;
+		return new Point(x / f, y / f);
 };
 
 // Функция Zoom
 function zoomTo(context, x, y, z) {
-    context.translate(originX, originY);
-    context.scale(z, z);
-    context.translate(-(x / scale + originX - x / (scale * z)), -(y / scale + originY - y / (scale * z)));
+		context.translate(originX, originY);
+		context.scale(z, z);
+		context.translate(-(x / scale + originX - x / (scale * z)), -(y / scale + originY - y / (scale * z)));
 
-    originX = (x / scale + originX - x / (scale * z));
-    originY = (y / scale + originY - y / (scale * z));
-    scale *= z;
+		originX = (x / scale + originX - x / (scale * z));
+		originY = (y / scale + originY - y / (scale * z));
+		scale *= z;
 };
 
 function calcPointsCirc(cx, cy, rad, dashLength){
@@ -491,12 +491,12 @@ function calcPointsCirc(cx, cy, rad, dashLength){
 	{
 		var theta = alpha * i,
 		theta2 = alpha * (i + 1);
-		
+
 		points.push({x : (Math.cos(theta) * rad) + cx, y : (Math.sin(theta) * rad) + cy, ex : (Math.cos(theta2) * rad) + cx, ey : (Math.sin(theta2) * rad) + cy});
 		i += 2;
-	}              
-	return points;            
-} 
+	}
+	return points;
+}
 
 var CP = window.CanvasRenderingContext2D && CanvasRenderingContext2D.prototype;
 if (CP && CP.lineTo){
@@ -767,7 +767,7 @@ if (CP && CP.lineTo){
 			</xsl:call-template>
 		</xsl:if>
 	</xsl:template>
-	
+
 	<xsl:template name="Form1">
 		<br/>
 		<div class="left">
@@ -780,7 +780,7 @@ if (CP && CP.lineTo){
 					<xsl:text>1</xsl:text>
 				</th>
 				<th width="28%" class="left vtop">
-                    <nobr>Адрес (описание местоположения):</nobr>
+										<nobr>Адрес (описание местоположения):</nobr>
 				</th>
 				<th class="left vtop" colspan="3">
 					<xsl:apply-templates select="kv:Address"/>
@@ -917,7 +917,7 @@ if (CP && CP.lineTo){
 					<xsl:text>3</xsl:text>
 				</th>
 				<th width="28%" class="left vtop">
-                    <xsl:text>Назначение:</xsl:text>
+										<xsl:text>Назначение:</xsl:text>
 				</th>
 				<th class="left vtop" colspan="3">
 					<xsl:if test="kv:AssignationBuilding">
@@ -941,7 +941,7 @@ if (CP && CP.lineTo){
 					<xsl:text>4</xsl:text>
 				</th>
 				<th width="28%" class="left vtop">
-                    <xsl:text>Наименование:</xsl:text>
+										<xsl:text>Наименование:</xsl:text>
 				</th>
 				<th class="left vtop" colspan="3">
 					<xsl:value-of select="kv:Name"/>
@@ -1480,7 +1480,7 @@ if (CP && CP.lineTo){
 													<xsl:apply-templates select="$currentPlan/ancestor::kv:ConditionalPartLinear[descendant::kv:EntitySpatial]" mode="poly">
 														<xsl:with-param name="count" select="count($currentPlan/ancestor::kv:ConditionalPartLinear[descendant::kv:EntitySpatial])"/>
 													</xsl:apply-templates>
-													
+
 													<![CDATA[
 													for (var i = CoordsNew.length - 1; i >= 0; i--) {
 														for (var z = 0; z < CoordsNew[i].length; z++) {
@@ -1505,22 +1505,22 @@ if (CP && CP.lineTo){
 													var id = '<xsl:value-of select="$canvas"/>';
 													canvas = document.getElementById(id);
 													if (!canvas.getContext) return;
-													
+
 													context = canvas.getContext("2d");
-													
+
 													// Отрисовка по таймеру
 													setInterval(drawPoly<xsl:value-of select="$index_cur"/>, 100, canvas, context, CoordsNew, minX, maxX, minY, maxY);
-												
+
 													// Обработчик колеса мыши
 													canvas.onmousewheel = function (event) {
 														var mousex = event.clientX - canvas.offsetLeft;
 														var mousey = event.clientY - canvas.offsetTop;
 														var wheel = event.wheelDelta / 120;
-												
+
 														var zoom = Math.pow(1 + Math.abs(wheel) / 2, wheel > 0 ? 1 : -1);
-												
+
 														zoomTo(context, mousex, mousey, zoom);
-												
+
 														if (event.preventDefault) {
 															event.preventDefault();
 														}
@@ -1528,29 +1528,29 @@ if (CP && CP.lineTo){
 													var scale = 1;
 													$(canvas).mousedown(function mouseMove(event)
 													{
-														// Когда отпускаем мышку - перестаем 
+														// Когда отпускаем мышку - перестаем
 														$(document).bind('mouseup.cropper', function () {
 															$(document).unbind('mousemove.cropper');
 															$(document).unbind('mouseup.cropper');
 														});
-													
+
 														//Сохраняем координаты нажатия
 														var oldX = event.clientX, oldY = event.clientY;
-													
+
 														// Перемещаем все объекты по карте вместе с мышью
 														$(document).bind('mousemove.cropper', function (event) {
 															var x = event.clientX, y = event.clientY, newX = (oldX - x) * -1, newY = (oldY - y) * -1;
-													
+
 															originx = newX / scale;
 															originy = newY / scale;
-													
+
 															// Перемещаем объект
 															context.clearRect(0, 0, context.canvas.width, context.canvas.height);
 															context.translate(newX / scale, newY / scale);
-													
+
 															// Перерисовываем картинку
 															drawPoly<xsl:value-of select="$index_cur"/>(canvas, context, CoordsNew, minX, maxX, minY, maxY);
-													
+
 															// Обновляем координаты
 															oldX = x;
 															oldY = y;
@@ -1558,46 +1558,46 @@ if (CP && CP.lineTo){
 														});
 														return false;
 													});
-													
+
 													drawPoly<xsl:value-of select="$index_cur"/>(canvas, context, CoordsNew, minX, maxX, minY, maxY);
 												};
 												load<xsl:value-of select="$index_cur"/>();
 												function drawPoly<xsl:value-of select="$index_cur"/>(canvas, context, CoordsNew, minX, maxX, minY, maxY){
 												<![CDATA[
 													context.fillStyle = "white";
-												
+
 													var width = 700;
 													var height = 600;
-												
+
 													context.save();
 													context.setTransform(1, 0, 0, 1, 0, 0);
 													context.clearRect(0, 0, canvas.width, canvas.height);
 													context.restore();
-												
+
 													var cX = maxY - minY;
 													var cY = maxX - minX;
-												
+
 													// Коэффициент масштабирования
 													var koef;
 													var koefX = cX / width;
 													var koefY = cY / height;
 													if (koefX < koefY) koef = koefY; else koef = koefX;
-												
+
 													// Смещение координат для центрирования
 													var offX = 0;
 													var offY = 0;
 													//if (cX < height) offY = (height - cX) / 2; else offX = (width - cY) / 2;
-												
+
 													for (var i = CoordsNew.length - 1; i >= 0; i--) {
 														var polygon = [];
 														context.save();
 														context.beginPath();
 														context.lineWidth = 2;
-												
+
 														for (var z = 0; z < CoordsNew[i].length; z++) {
 															x1 = ((maxX - CoordsNew[i][z][1]) / koef) + offX;
 															y1 = ((CoordsNew[i][z][2] - minY) / koef) + offY;
-												
+
 															if (CoordsNew[i][z].length > 4) {
 																x2p = x1;
 																y2p = y1;
@@ -1605,14 +1605,14 @@ if (CP && CP.lineTo){
 																for (var j = 1; j < CoordsNew[i][z].length / 2; j++) {
 																	x2 = ((maxX - CoordsNew[i][z][(j * 2) - 1]) / koef) + offX;
 																	y2 = ((CoordsNew[i][z][j * 2] - minY) / koef) + offY;
-												
+
 																	if (CoordsNew[i][0][0].charAt(0) == 'R')
 																		context.dashedLine(y2p, x2p, y2, x2, [2, 5]);
 																	else if (CoordsNew[i][0][0].charAt(0) == 'P')
 																		context.dashedLine(y2p, x2p, y2, x2, [8, 5]);
 																	else
 																		context.lineTo(y2, x2);
-												
+
 																	polygon[j - 1] = new Point(y2, x2);
 																	x2p = x2;
 																	y2p = y2;
@@ -1623,18 +1623,18 @@ if (CP && CP.lineTo){
 																context.beginPath();
 																var rx = ((maxX - (CoordsNew[i][z][1] + (CoordsNew[i][z][3] * Math.cos(2 * Math.PI)))) / koef) + offX;
 																var ry = (((CoordsNew[i][z][2] + (CoordsNew[i][z][3] * Math.sin(2 * Math.PI))) - minY) / koef) + offY;
-																
+
 																if (CoordsNew[i][0][0].charAt(0) == 'R'){
 																	context.fillStyle = "Black";
 																	var dotsPerCircle=60;
 																	var interval=(Math.PI*2)/dotsPerCircle;
-																	
+
 																	for(var d = 0; d < dotsPerCircle; d++){
 																		desiredRadianAngleOnCircle = interval*d;
-																		
+
 																		var x = y1 + (x1 - rx) * Math.cos(desiredRadianAngleOnCircle);
 																		var y = x1 + (x1 - rx) * Math.sin(desiredRadianAngleOnCircle);
-																		
+
 																		context.beginPath();
 																		context.arc(x, y, 1, 0, 2 * Math.PI);
 																		context.closePath();
@@ -1643,9 +1643,9 @@ if (CP && CP.lineTo){
 																}
 																else if (CoordsNew[i][0][0].charAt(0) == 'P'){
 																	context.fillStyle = "Black";
-																	
+
 																	var pointArray= calcPointsCirc(y1, x1, x1 - rx, 1);
-																	
+
 																	for(p = 0; p < pointArray.length; p++){
 																		context.moveTo(pointArray[p].x, pointArray[p].y);
 																		context.lineTo(pointArray[p].ex, pointArray[p].ey);
@@ -1654,15 +1654,15 @@ if (CP && CP.lineTo){
 																}
 																else
 																	context.arc(y1, x1, x1 - rx, 0, 2 * Math.PI);
-																	
+
 																polygon[polygon.length] = new Point(y1, x1);
 																context.restore();
 															}
 														}
-												
+
 														context.stroke();
 														context.restore();
-												
+
 														var center = (new Contour(polygon)).centroid();
 														if (isNaN(center.x) && isNaN(center.y)){
 															if (polygon.length==1){
@@ -1674,7 +1674,7 @@ if (CP && CP.lineTo){
 																center.y = polygon[1].y;
 															}
 														}
-														
+
 														if (CoordsNew[i][0][0].charAt(0) == 'Z')
 															context.fillStyle = "Black";
 														else
@@ -1721,7 +1721,7 @@ if (CP && CP.lineTo){
 			</xsl:call-template>
 		</xsl:if>
 	</xsl:template>
-	
+
 	<xsl:template name="Form2p">
 		<xsl:param name="index_cur"/>
 		<xsl:param name="prev_pages_total"/>
@@ -1981,7 +1981,7 @@ if (CP && CP.lineTo){
 													<xsl:call-template name="procherk"/>
 												</xsl:if>
 											</th>
-										</tr>			
+										</tr>
 										<tr>
 											<th width="15%" class="vtop" rowspan="2">Номера характерных точек контура части здания, сооружения</th>
 											<th class="vtop" colspan="2">Координаты, м</th>
@@ -2448,7 +2448,7 @@ if (CP && CP.lineTo){
 	<xsl:template match="kv:ConditionalPartsLinear">
 		<xsl:apply-templates select="kv:ConditionalPartLinear"/>
 	</xsl:template>
-	
+
 	<xsl:template match="kv:ConditionalPartLinear">
 		<xsl:if test="kv:ParentCadastralNumbers">
 			<xsl:for-each select="kv:ParentCadastralNumbers/kv:CadastralNumber">
@@ -2586,7 +2586,7 @@ if (CP && CP.lineTo){
 			</tr>
 			<tr>
 				<th class="left" width="50%">
-                    <nobr>Кадастровый номер:</nobr>
+										<nobr>Кадастровый номер:</nobr>
 				</th>
 				<th class="left" width="50%">
 					<xsl:value-of select="$cadNum"/>
@@ -2714,12 +2714,12 @@ if (CP && CP.lineTo){
 						<xsl:call-template name="procherk"/>
 					</xsl:if>
 				</th>
-			</tr>			
+			</tr>
 			<tr>
 				<th>(полное наименование должности)</th>
 				<th>(подпись)</th>
 				<th>(инициалы, фамилия)</th>
-			</tr>			
+			</tr>
 		</table>
 	</xsl:template>
 
@@ -2758,12 +2758,12 @@ if (CP && CP.lineTo){
 	<xsl:template name="smallCase">
 		<xsl:param name="text"/>
 		<xsl:value-of select="translate($text, $uppercase, $smallcase)"/>
-	</xsl:template>	
+	</xsl:template>
 
 	<xsl:template name="upperCase">
 		<xsl:param name="text"/>
 		<xsl:value-of select="translate($text, $smallcase, $uppercase)"/>
-	</xsl:template>	
+	</xsl:template>
 
 	<xsl:template match="kv:EntitySpatial">
 		<xsl:param name="count"/>
@@ -2842,7 +2842,7 @@ if (CP && CP.lineTo){
 			<xsl:text>var maxY</xsl:text><xsl:value-of select="$itemEntity"/><xsl:text> = </xsl:text><xsl:value-of select="$maxY"/><xsl:text>;</xsl:text>
 		</xsl:if>
 	</xsl:template>
-	
+
 	<xsl:template match="spa:SpatialElement">
 		<xsl:param name="count"/>
 		<xsl:param name="itemEntity"/>
@@ -2858,7 +2858,7 @@ if (CP && CP.lineTo){
 			</xsl:call-template>
 		</xsl:for-each>
 	</xsl:template>
-	
+
 	<xsl:template name="Ordinate">
 		<xsl:param name="itemEntity"/>
 		<xsl:param name="itemElement"/>
@@ -2879,7 +2879,7 @@ if (CP && CP.lineTo){
 			<xsl:with-param name="count" select="count(descendant::kv:EntitySpatial)"/>
 		</xsl:apply-templates>
 	</xsl:template>
-	
+
 	<xsl:template match="kv:EntitySpatial" mode="poly">
 		<xsl:param name="count"/>
 		<xsl:variable name="itemEntity" select="position() - 1"/>
@@ -2929,7 +2929,7 @@ if (CP && CP.lineTo){
 			</xsl:call-template>
 		</xsl:for-each>
 	</xsl:template>
-	
+
 	<xsl:template name="OrdinatePoly">
 		<xsl:param name="itemEntity"/>
 		<xsl:param name="itemElement"/>
